@@ -8,3 +8,5 @@ echo "$IP_K8S_MASTER	$NAME_K8S_MASTER" >> "$PATH_FILE_HOST_NODE"
 echo "$IP_K8S_NODE_1	$NAME_K8S_NODE_1" >> "$PATH_FILE_HOST_NODE"
 echo "$IP_K8S_NODE_2	$NAME_K8S_NODE_2" >> "$PATH_FILE_HOST_NODE"
 
+setenforce 0
+sed -i --follow-symlinks 's/SELINUX=enforcing/SELINUX=disabled/g' /etc/sysconfig/selinux
