@@ -16,3 +16,5 @@ echo '1' > /proc/sys/net/bridge/bridge-nf-call-iptables
 
 sed -i '/swap/d' /etc/fstab
 swapoff -a
+
+yum install -y yum-utils device-mapper-persistent-data lvm2
