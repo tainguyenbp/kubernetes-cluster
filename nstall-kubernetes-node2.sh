@@ -10,3 +10,6 @@ echo "$IP_K8S_NODE_2	$NAME_K8S_NODE_2" >> "$PATH_FILE_HOST_NODE"
 
 setenforce 0
 sed -i --follow-symlinks 's/SELINUX=enforcing/SELINUX=disabled/g' /etc/sysconfig/selinux
+
+modprobe br_netfilter
+echo '1' > /proc/sys/net/bridge/bridge-nf-call-iptables
