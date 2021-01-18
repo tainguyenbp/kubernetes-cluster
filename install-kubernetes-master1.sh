@@ -43,3 +43,5 @@ sed -i 's/cgroup-driver=systemd/cgroup-driver=cgroupfs/g' /etc/systemd/system/ku
 
 systemctl daemon-reload
 systemctl restart kubelet
+
+kubeadm init --apiserver-advertise-address=`$IP_K8S_MASTER` --pod-network-cidr=10.244.0.0/16
