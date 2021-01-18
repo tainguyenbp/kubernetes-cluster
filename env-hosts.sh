@@ -8,3 +8,5 @@ export IP_K8S_NODE_1='192.168.10.10'
 
 export NAME_K8S_NODE_2='kubernetes-node2'
 export IP_K8S_NODE_2='192.168.10.20'
+
+export PATH_FILE_HOST_NODE='/etc/hosts'
