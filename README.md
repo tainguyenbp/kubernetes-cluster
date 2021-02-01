@@ -6,12 +6,11 @@ Download repo from git
 > git clone https://github.com/tainguyenbp/kubernetes-cluster-kubeadm.git<br>
 > cd kubernetes-cluster-kubeadm<br>
 setup node kubernetes master
-* run command execute <br>
-> bash <br>
+* run command execute script install kubernetes master<br>
+> bash install-kubernetes-master1.sh<br>
 setup node kubernetes node 1
 * run command execute script install kubernetes node 1<br>
-> git clone https://github.com/tainguyenbp/kubernetes-cluster-kubeadm.git<br>
-> cd kubernetes-cluster-kubeadm<br>
+> bash install-kubernetes-node1.sh<br>
 setup node kubernetes node 2
 * run command execute script install kubernetes node 2<br>
-> bash <br>
+> bash install-kubernetes-node2.sh<br>
