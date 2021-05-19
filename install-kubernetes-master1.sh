@@ -44,13 +44,13 @@ sed -i 's/cgroup-driver=systemd/cgroup-driver=cgroupfs/g' /etc/systemd/system/ku
 systemctl daemon-reload
 systemctl restart kubelet
 
-kubeadm init --apiserver-advertise-address=`$IP_K8S_MASTER` --pod-network-cidr=10.244.0.0/16
+sudo kubeadm init --apiserver-advertise-address=`$IP_K8S_MASTER` --pod-network-cidr=10.244.0.0/16
 
 mkdir -p $HOME/.kube
 cp -i /etc/kubernetes/admin.conf $HOME/.kube/config
 chown $(id -u):$(id -g) $HOME/.kube/config
 
-kubectl apply -f https://raw.githubusercontent.com/coreos/flannel/master/Documentation/kube-flannel.yml
+sudo kubectl apply -f https://raw.githubusercontent.com/coreos/flannel/master/Documentation/kube-flannel.yml
 
-kubectl get nodes
-kubectl get pods --all-namespaces
+sudo kubectl get nodes
+sudo kubectl get pods --all-namespaces
