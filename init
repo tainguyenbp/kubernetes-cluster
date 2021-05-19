@@ -1,4 +1,4 @@
-step 1 reset: 
+step 1 reset: the first, switch to the sudo account
 sudo kubeadm reset && sudo rm -rf .kube/ && sudo rm -rf /etc/kubernetes/ && sudo rm -rf /var/lib/kubelet/ && sudo rm -rf /var/lib/etcd
 
 step 2: sudo kubeadm init --control-plane-endpoint IP:6443 --upload-certs
