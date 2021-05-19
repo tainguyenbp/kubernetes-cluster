@@ -1,0 +1,15 @@
+step 1 reset: 
+sudo kubeadm reset && sudo rm -rf .kube/ && sudo rm -rf /etc/kubernetes/ && sudo rm -rf /var/lib/kubelet/ && sudo rm -rf /var/lib/etcd
+
+step 2: sudo kubeadm init --control-plane-endpoint IP:6443 --upload-certs
+
+step 3: sudo mkdir -p $HOME/.kube
+step 4: sudo cp -i /etc/kubernetes/admin.conf $HOME/.kube/config
+step 5: sudo chown $(id -u):$(id -g) $HOME/.kube/config
+
+step 6: sudo kubectl apply -f https://raw.githubusercontent.com/coreos/flannel/master/Documentation/kube-flannel.yml
+or
+kubectl apply -f "https://cloud.weave.works/k8s/net?k8s-version=$(kubectl version | base64 | tr -d '\n')"
+
+sudo kubectl get nodes
+sudo kubectl get pods --all-namespaces
