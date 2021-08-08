@@ -1,5 +1,7 @@
 ### Topology and requirement
 
+|Item|Hostname|IP|Function|
+|----|--------|--|--------|
 |1|api.tainguyenbp.com|192.168.1.2|Loadbalancer|
 |2|master01.tainguyenbp.com|192.168.1.3|Master|
 |3|master02.tainguyenbp.com|192.168.1.4|Master|
