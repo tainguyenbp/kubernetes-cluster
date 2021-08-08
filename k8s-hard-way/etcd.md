@@ -1,7 +1,7 @@
 # kubernetes the hard way ubuntu 
 ### Cluster ETCD - ETCD
 ### Requirement step
-### Generate from ssl from server master01
+### Generate from ssl from server master01 - 192.168.1.2
 ```
 mkdir -p /home/tainguyenbp/ssl-k8s/
 cd /home/tainguyenbp/ssl-k8s/
@@ -32,7 +32,7 @@ copy ca.crt genareted from server master01 to server etcd01, etcd02, etcd03
 copy etcd-server.crt, etcd-server.key from server master01 to server etcd01, etcd02, etcd03
 ```
 
-### Install etcd on server ETCD01
+### Install etcd on server ETCD01 - 192.168.1.9
 ```
 ETCD_VER=v3.5.0
 
