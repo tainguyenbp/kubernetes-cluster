@@ -62,26 +62,17 @@ copy etcd-server.crt, etcd-server.key from server master01 to server etcd01, etc
 
 ### Install Kube API Server on server Master01 - 192.168.1.2
 ```
-ETCD_VER=v3.5.0
+KUBE_VERSION='v1.20.9'
 
-GOOGLE_URL=https://storage.googleapis.com/etcd
-GITHUB_URL=https://github.com/etcd-io/etcd/releases/download
-DOWNLOAD_URL=${GOOGLE_URL}
+wget -q --show-progress --https-only --timestamping \
+  "https://storage.googleapis.com/kubernetes-release/release/${KUBE_VERSION}/bin/linux/amd64/kube-apiserver" \
+  "https://storage.googleapis.com/kubernetes-release/release/${KUBE_VERSION}/bin/linux/amd64/kube-controller-manager" \
+  "https://storage.googleapis.com/kubernetes-release/release/${KUBE_VERSION}/bin/linux/amd64/kube-scheduler" \
+  "https://storage.googleapis.com/kubernetes-release/release/${KUBE_VERSION}/bin/linux/amd64/kubectl"
 
-rm -f /tmp/etcd-${ETCD_VER}-linux-amd64.tar.gz
-rm -rf /tmp/etcd-download-test && mkdir -p /tmp/etcd-download-test
+chmod +x kube-apiserver kube-controller-manager kube-scheduler kubectl
+sudo mv kube-apiserver kube-controller-manager kube-scheduler kubectl /usr/local/bin/
 
-curl -L ${DOWNLOAD_URL}/${ETCD_VER}/etcd-${ETCD_VER}-linux-amd64.tar.gz -o /tmp/etcd-${ETCD_VER}-linux-amd64.tar.gz
-tar xzvf /tmp/etcd-${ETCD_VER}-linux-amd64.tar.gz -C /tmp/etcd-download-test --strip-components=1
-rm -f /tmp/etcd-${ETCD_VER}-linux-amd64.tar.gz
-
-/tmp/etcd-download-test/etcd --version
-/tmp/etcd-download-test/etcdctl version
-/tmp/etcd-download-test/etcdutl version
-
-sudo mv /tmp/etcd-download-test/etcd /usr/local/bin/
-sudo mv /tmp/etcd-download-test/etcdctl /usr/local/bin/
-sudo mv /tmp/etcd-download-test/etcdutl /usr/local/bin/
 ```
 
 ```
@@ -139,26 +130,17 @@ kubectl get componentstatuses --kubeconfig /var/lib/kubernetes/admin.kubeconfig
 
 ### Install Kube API Server on server Master02 - 192.168.1.3
 ```
-ETCD_VER=v3.5.0
+KUBE_VERSION='v1.20.9'
 
-GOOGLE_URL=https://storage.googleapis.com/etcd
-GITHUB_URL=https://github.com/etcd-io/etcd/releases/download
-DOWNLOAD_URL=${GOOGLE_URL}
+wget -q --show-progress --https-only --timestamping \
+  "https://storage.googleapis.com/kubernetes-release/release/${KUBE_VERSION}/bin/linux/amd64/kube-apiserver" \
+  "https://storage.googleapis.com/kubernetes-release/release/${KUBE_VERSION}/bin/linux/amd64/kube-controller-manager" \
+  "https://storage.googleapis.com/kubernetes-release/release/${KUBE_VERSION}/bin/linux/amd64/kube-scheduler" \
+  "https://storage.googleapis.com/kubernetes-release/release/${KUBE_VERSION}/bin/linux/amd64/kubectl"
 
-rm -f /tmp/etcd-${ETCD_VER}-linux-amd64.tar.gz
-rm -rf /tmp/etcd-download-test && mkdir -p /tmp/etcd-download-test
+chmod +x kube-apiserver kube-controller-manager kube-scheduler kubectl
+sudo mv kube-apiserver kube-controller-manager kube-scheduler kubectl /usr/local/bin/
 
-curl -L ${DOWNLOAD_URL}/${ETCD_VER}/etcd-${ETCD_VER}-linux-amd64.tar.gz -o /tmp/etcd-${ETCD_VER}-linux-amd64.tar.gz
-tar xzvf /tmp/etcd-${ETCD_VER}-linux-amd64.tar.gz -C /tmp/etcd-download-test --strip-components=1
-rm -f /tmp/etcd-${ETCD_VER}-linux-amd64.tar.gz
-
-/tmp/etcd-download-test/etcd --version
-/tmp/etcd-download-test/etcdctl version
-/tmp/etcd-download-test/etcdutl version
-
-sudo mv /tmp/etcd-download-test/etcd /usr/local/bin/
-sudo mv /tmp/etcd-download-test/etcdctl /usr/local/bin/
-sudo mv /tmp/etcd-download-test/etcdutl /usr/local/bin/
 ```
 
 ```
@@ -216,26 +198,17 @@ kubectl get componentstatuses --kubeconfig /var/lib/kubernetes/admin.kubeconfig
 
 ### Install Kube API Server on server Master03 - 192.168.1.4
 ```
-ETCD_VER=v3.5.0
+KUBE_VERSION='v1.20.9'
 
-GOOGLE_URL=https://storage.googleapis.com/etcd
-GITHUB_URL=https://github.com/etcd-io/etcd/releases/download
-DOWNLOAD_URL=${GOOGLE_URL}
+wget -q --show-progress --https-only --timestamping \
+  "https://storage.googleapis.com/kubernetes-release/release/${KUBE_VERSION}/bin/linux/amd64/kube-apiserver" \
+  "https://storage.googleapis.com/kubernetes-release/release/${KUBE_VERSION}/bin/linux/amd64/kube-controller-manager" \
+  "https://storage.googleapis.com/kubernetes-release/release/${KUBE_VERSION}/bin/linux/amd64/kube-scheduler" \
+  "https://storage.googleapis.com/kubernetes-release/release/${KUBE_VERSION}/bin/linux/amd64/kubectl"
 
-rm -f /tmp/etcd-${ETCD_VER}-linux-amd64.tar.gz
-rm -rf /tmp/etcd-download-test && mkdir -p /tmp/etcd-download-test
+chmod +x kube-apiserver kube-controller-manager kube-scheduler kubectl
+sudo mv kube-apiserver kube-controller-manager kube-scheduler kubectl /usr/local/bin/
 
-curl -L ${DOWNLOAD_URL}/${ETCD_VER}/etcd-${ETCD_VER}-linux-amd64.tar.gz -o /tmp/etcd-${ETCD_VER}-linux-amd64.tar.gz
-tar xzvf /tmp/etcd-${ETCD_VER}-linux-amd64.tar.gz -C /tmp/etcd-download-test --strip-components=1
-rm -f /tmp/etcd-${ETCD_VER}-linux-amd64.tar.gz
-
-/tmp/etcd-download-test/etcd --version
-/tmp/etcd-download-test/etcdctl version
-/tmp/etcd-download-test/etcdutl version
-
-sudo mv /tmp/etcd-download-test/etcd /usr/local/bin/
-sudo mv /tmp/etcd-download-test/etcdctl /usr/local/bin/
-sudo mv /tmp/etcd-download-test/etcdutl /usr/local/bin/
 ```
 
 ```
