@@ -1,5 +1,11 @@
 ### README
 
+# Kubernetes Cluster
+- Kubernetes 1.20.x
+- Docker 20.x
+- etcd v3.5.x
+- Nginx v1.17.x or HAproxy
+
 |Item|Hostname|IP|Function|
 |----|--------|--|--------|
 |1|api.tainguyenbp.com|192.168.1.2|Loadbalancer|
