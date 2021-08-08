@@ -141,10 +141,10 @@ ExecStart=/usr/local/bin/etcd \\
   --peer-trusted-ca-file=/etc/etcd/ca.crt \\
   --peer-client-cert-auth \\
   --client-cert-auth \\
-  --initial-advertise-peer-urls https://192.168.1.9:2380 \\
-  --listen-peer-urls https://192.168.1.9:2380 \\
-  --listen-client-urls https://192.168.1.9:2379,https://127.0.0.1:2379 \\
-  --advertise-client-urls https://192.168.1.9:2379 \\
+  --initial-advertise-peer-urls https://192.168.1.10:2380 \\
+  --listen-peer-urls https://192.168.1.10:2380 \\
+  --listen-client-urls https://192.168.1.10:2379,https://127.0.0.1:2379 \\
+  --advertise-client-urls https://192.168.1.10:2379 \\
   --initial-cluster-token etcd-cluster-0 \\
   --initial-cluster ETCD01=https://192.168.1.9:2380,ETCD02=https://192.168.1.10:2380,ETCD03=https://192.168.1.11:2380 \\
   --initial-cluster-state new \\
@@ -210,10 +210,10 @@ ExecStart=/usr/local/bin/etcd \\
   --peer-trusted-ca-file=/etc/etcd/ca.crt \\
   --peer-client-cert-auth \\
   --client-cert-auth \\
-  --initial-advertise-peer-urls https://192.168.1.9:2380 \\
-  --listen-peer-urls https://192.168.1.9:2380 \\
-  --listen-client-urls https://192.168.1.9:2379,https://127.0.0.1:2379 \\
-  --advertise-client-urls https://192.168.1.9:2379 \\
+  --initial-advertise-peer-urls https://192.168.1.11:2380 \\
+  --listen-peer-urls https://192.168.1.11:2380 \\
+  --listen-client-urls https://192.168.1.11:2379,https://127.0.0.1:2379 \\
+  --advertise-client-urls https://192.168.1.11:2379 \\
   --initial-cluster-token etcd-cluster-0 \\
   --initial-cluster ETCD01=https://192.168.1.9:2380,ETCD02=https://192.168.1.10:2380,ETCD03=https://192.168.1.11:2380 \\
   --initial-cluster-state new \\
