@@ -137,7 +137,7 @@ EOF
 kubectl get componentstatuses --kubeconfig /var/lib/kubernetes/admin.kubeconfig 
 ```
 
-
+### Install Kube API Server on server Master02 - 192.168.1.3
 ```
 ETCD_VER=v3.5.0
 
@@ -214,7 +214,7 @@ EOF
 kubectl get componentstatuses --kubeconfig /var/lib/kubernetes/admin.kubeconfig 
 ```
 
-
+### Install Kube API Server on server Master03 - 192.168.1.4
 ```
 ETCD_VER=v3.5.0
 
