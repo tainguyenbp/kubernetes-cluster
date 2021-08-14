@@ -13,6 +13,13 @@ sudo swapoff -a 
 sudo apt-get update
 sudo apt-get install docker-ce kubelet=1.20.5-00 kubeadm=1.20.5-00 kubectl=1.20.5-00 -y
 
+
+sudo kubeadm init --control-plane-endpoint 192.168.1.1:6443 --upload-certs --v=15
+
+
+
+
+
 ```
 
 
