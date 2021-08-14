@@ -93,13 +93,36 @@ Docker version
 ```
 kubeadm@master01:~$ docker --version
 Docker version 20.10.8, build 3967b7d
-``
+```
 
-sudo kubeadm init --control-plane-endpoint "{ngin-proxy-ip}:6443" --upload-certs
+Stacked control plane and etcd nodes
+```
+sudo kubeadm init --control-plane-endpoint "192.1268.1.1:6443" --upload-certs --v=15
+sudo kubeadm init --control-plane-endpoint "LOAD_BALANCER_DNS:LOAD_BALANCER_PORT" --upload-certs
 
+```
+# Noted
+```
+sudo kubeadm reset -f
 
-
-
+sudo rm -rf /etc/cni/net.d/*
+sudo rm -rf .kube/
+sudo rm -rf /var/lib/kubelet
+sudo rm -rf /var/lib/etcd
+sudo rm -rf /etc/kubernetes/ 
+sudo rm -rf /var/lib/kubelet/
+sudo rm -rf /var/lib/etcd
+sudo rm -rf /etc/cni/net.d
+sudo iptables -F
+sudo iptables -t nat -F
+sudo iptables -t mangle -F 
+sudo iptables -X
+sudo iptables -t filter -F 
+sudo iptables -t filter -X
+sudo ipvsadm --clear
+sudo rm -rf /etc/kubernetes
+sudo rm -rf /etc/cni /etc/kubernetes /var/lib/dockershim /var/lib/etcd /var/lib/kubelet /var/run/kubernetes ~/.kube/*
+```
 
 
 
