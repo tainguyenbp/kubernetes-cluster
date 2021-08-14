@@ -101,7 +101,7 @@ sudo kubeadm init --control-plane-endpoint "192.1268.1.1:6443" --upload-certs --
 sudo kubeadm init --control-plane-endpoint "LOAD_BALANCER_DNS:LOAD_BALANCER_PORT" --upload-certs
 
 ```
-# Noted
+# Note 1
 ```
 sudo kubeadm reset -f
 
@@ -123,8 +123,16 @@ sudo ipvsadm --clear
 sudo rm -rf /etc/kubernetes
 sudo rm -rf /etc/cni /etc/kubernetes /var/lib/dockershim /var/lib/etcd /var/lib/kubelet /var/run/kubernetes ~/.kube/*
 ```
-
-
+# Note 2
+```
+sudo kubeadm reset -f
+sudo rm -rf /etc/cni /etc/kubernetes /var/lib/dockershim /var/lib/etcd /var/lib/kubelet /var/run/kubernetes ~/.kube/*
+sudo iptables -F && sudo iptables -X
+sudo iptables -t nat -F && sudo iptables -t nat -X
+sudo iptables -t raw -F && sudo iptables -t raw -X
+sudo iptables -t mangle -F && sudo iptables -t mangle -X
+sudo systemctl restart docker
+```
 
 
 
