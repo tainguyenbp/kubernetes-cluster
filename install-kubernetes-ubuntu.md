@@ -72,6 +72,8 @@ sudo apt-mark hold kubelet kubeadm kubectl
 
 Change CgroupDriver of docker to systemd
 ```
+sudo more /etc/docker/daemon.json
+
 sudo docker info -f {{.CgroupDriver}}
 sudo nano /etc/docker/daemon.json
 
@@ -84,9 +86,16 @@ sudo nano /etc/docker/daemon.json
   "storage-driver": "overlay2"
 }
 sudo service docker restart
+sudo service docker status
+
 ```
+Docker version
+```
+kubeadm@master01:~$ docker --version
+Docker version 20.10.8, build 3967b7d
+``
 
-
+sudo kubeadm init --control-plane-endpoint "{ngin-proxy-ip}:6443" --upload-certs
 
 
 
