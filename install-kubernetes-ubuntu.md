@@ -151,9 +151,17 @@ sudo systemctl restart docker
 sudo apt-get remove docker-ce kubelet kubeadm kubectl -y
 sudo apt-get purge docker-ce kubeadm kubectl kubelet kubernetes-cni kube* 
 sudo apt autoremove
+
+
+```
+# Note 4
 ```
 
+Use following two commands to remove calico from your node:
 
+kubectl delete -f https://docs.projectcalico.org/v3.3/getting-started/kubernetes/installation/hosted/rbac-kdd.yaml
+kubectl delete -f https://docs.projectcalico.org/v3.3/getting-started/kubernetes/installation/hosted/kubernetes-datastore/calico-networking/1.7/calico.yaml
+````
 
 
 
