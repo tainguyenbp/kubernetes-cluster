@@ -17,6 +17,9 @@ sudo apt-get install docker-ce kubelet=1.20.5-00 kubeadm=1.20.5-00 kubectl=1.20.
 sudo kubeadm init --control-plane-endpoint 192.168.1.1:6443 --upload-certs --v=15
 
 sudo apt-get install -y kubelet=1.19.7-00 kubeadm=1.19.7-00 kubectl=1.19.7-00
+
+
+sudo apt-get install -y kubelet=1.19.14 kubeadm=1.19.14 kubectl=1.19.14
 sudo apt-mark hold kubelet kubeadm kubectl
 
 cat <<EOF | sudo tee /etc/modules-load.d/k8s.conf
