@@ -63,13 +63,14 @@ deb https://apt.kubernetes.io/ kubernetes-xenial main
 EOF
 
 
-
-sudo apt-get install docker-ce -y
 sudo swapoff -a 
 
 sudo apt-get update
-sudo apt-get install docker-ce=5:20.10.8~3-0~ubuntu-focal
+
+sudo apt-get install docker-ce=5:20.10.8~3-0~ubuntu-focal containerd.io -y
+
 sudo apt-get install kubelet=1.20.5-00 kubeadm=1.20.5-00 kubectl=1.20.5-00 -y
+
 sudo apt-mark hold kubelet kubeadm kubectl
 
 ```
