@@ -105,6 +105,8 @@ Docker version 20.10.8, build 3967b7d
 
 Stacked control plane and etcd nodes
 ```
+
+
 sudo kubeadm init --control-plane-endpoint "192.1268.1.1:6443" --upload-certs --v=15
 sudo kubeadm init --control-plane-endpoint "LOAD_BALANCER_DNS:LOAD_BALANCER_PORT" --upload-certs
 
@@ -115,7 +117,25 @@ sudo kubeadm init --control-plane-endpoint "192.1268.1.1:6443" --pod-network-cid
 
 
 kubectl apply -f "https://cloud.weave.works/k8s/net?k8s-version=$(kubectl version | base64 | tr -d '\n')"
+
+
+mkdir -p $HOME/.kube   
+cp -i /etc/kubernetes/admin.conf $HOME/.kube/config   
+chown $(id -u):$(id -g) $HOME/.kube/config
 ```
+### create token join 1
+```
+kubeadm init phase upload-certs --upload-certs
+
+kubeadm token create \
+--print-join-command \
+--certificate-key \
+$(kubeadm certs certificate-key)
+
+sudo kubeadm token create --print-join-command --certificate-key `sudo kubeadm init phase upload-certs --upload-certs | sed -n '3 p'`
+```
+
+
 # Note 1
 ```
 sudo kubeadm reset -f
@@ -137,9 +157,8 @@ sudo iptables -t filter -X
 sudo ipvsadm --clear
 sudo rm -rf /etc/kubernetes
 sudo rm -rf /etc/cni /etc/kubernetes /var/lib/dockershim /var/lib/etcd /var/lib/kubelet /var/run/kubernetes ~/.kube/*
-```
-# Note 2
-```
+
+
 sudo kubeadm reset -f
 sudo rm -rf /etc/cni /etc/kubernetes /var/lib/dockershim /var/lib/etcd /var/lib/kubelet /var/run/kubernetes ~/.kube/*
 sudo iptables -F && sudo iptables -X
@@ -147,6 +166,15 @@ sudo iptables -t nat -F && sudo iptables -t nat -X
 sudo iptables -t raw -F && sudo iptables -t raw -X
 sudo iptables -t mangle -F && sudo iptables -t mangle -X
 sudo systemctl restart docker
+```
+# Note 2
+```
+
+kubectl drain master03 --delete-local-data --force --ignore-daemonsets
+kubectl delete node master03 
+kubectl drain master02 --delete-local-data --force --ignore-daemonsets
+kubectl delete node master02
+
 ```
 
 # Note 3
