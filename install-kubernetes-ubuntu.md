@@ -134,6 +134,16 @@ $(kubeadm certs certificate-key)
 
 sudo kubeadm token create --print-join-command --certificate-key `sudo kubeadm init phase upload-certs --upload-certs | sed -n '3 p'`
 ```
+
+### Certificate Management with kubeadm
+```
+kubeadm alpha certs check-expiration
+```
+
+### Check list token with kubeadm
+```
+kubeadm token lists
+```
 ### script check 
 ```
 kubectl get pods -n production | grep CrashLoopBackOff | awk '{print $1}' | xargs kubectl describe pod -n production  | grep event
