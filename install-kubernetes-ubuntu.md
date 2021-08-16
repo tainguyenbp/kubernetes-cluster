@@ -11,15 +11,25 @@ cat <<EOF | sudo tee /etc/apt/sources.list.d/kubernetes.list deb https://apt.
 sudo swapoff -a 
 
 sudo apt-get update
-sudo apt-get install docker-ce kubelet=1.20.5-00 kubeadm=1.20.5-00 kubectl=1.20.5-00 -y
+sudo swapoff -a 
 
+sudo apt-get update
 
-sudo kubeadm init --control-plane-endpoint 192.168.1.1:6443 --upload-certs --v=15
+sudo apt-get install docker-ce -y
+
+# [WARNING SystemVerification]: this Docker version is not on the list of validated versions: 20.10.8. Latest validated version: 19.03
+sudo apt-get install docker-ce=5:19.03.12~3-0~ubuntu-focal -y
+
+sudo apt-get install docker-ce=5:20.10.8~3-0~ubuntu-focal
+
+sudo apt-get install containerd.io -y
 
 sudo apt-get install -y kubelet=1.19.7-00 kubeadm=1.19.7-00 kubectl=1.19.7-00
 
-
 sudo apt-get install -y kubelet=1.19.14-00 kubeadm=1.19.14-00 kubectl=1.19.14-00
+
+sudo apt-get install kubelet=1.20.5-00 kubeadm=1.20.5-00 kubectl=1.20.5-00 -y
+
 sudo apt-mark hold kubelet kubeadm kubectl
 
 cat <<EOF | sudo tee /etc/modules-load.d/k8s.conf
@@ -63,15 +73,7 @@ deb https://apt.kubernetes.io/ kubernetes-xenial main
 EOF
 
 
-sudo swapoff -a 
 
-sudo apt-get update
-
-sudo apt-get install docker-ce=5:20.10.8~3-0~ubuntu-focal containerd.io -y
-
-sudo apt-get install kubelet=1.20.5-00 kubeadm=1.20.5-00 kubectl=1.20.5-00 -y
-
-sudo apt-mark hold kubelet kubeadm kubectl
 
 ```
 
