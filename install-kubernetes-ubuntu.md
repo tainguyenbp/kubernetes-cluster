@@ -106,6 +106,8 @@ Stacked control plane and etcd nodes
 sudo kubeadm init --control-plane-endpoint "192.1268.1.1:6443" --upload-certs --v=15
 sudo kubeadm init --control-plane-endpoint "LOAD_BALANCER_DNS:LOAD_BALANCER_PORT" --upload-certs
 
+
+sudo kubeadm init --control-plane-endpoint "192.1268.1.1:6443" --pod-network-cidr=192.168.0.0/16 --upload-certs --v=15
 ```
 # Note 1
 ```
