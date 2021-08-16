@@ -138,6 +138,7 @@ sudo kubeadm token create --print-join-command --certificate-key `sudo kubeadm i
 
 # Note 1
 ```
+sudo kubeadm reset --cri-socket unix:///var/run/crio/crio.sock
 sudo kubeadm reset -f
 
 sudo rm -rf /etc/cni/net.d/*
