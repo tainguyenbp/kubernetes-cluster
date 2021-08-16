@@ -112,6 +112,9 @@ sudo kubeadm init --control-plane-endpoint "LOAD_BALANCER_DNS:LOAD_BALANCER_PORT
 sudo kubeadm init --control-plane-endpoint "192.1268.1.1:6443" --pod-network-cidr=192.168.0.0/16 --upload-certs --v=15
 
 sudo kubeadm init --control-plane-endpoint "192.1268.1.1:6443" --pod-network-cidr=10.15.0.0/16 --upload-certs --v=15
+
+
+kubectl apply -f "https://cloud.weave.works/k8s/net?k8s-version=$(kubectl version | base64 | tr -d '\n')"
 ```
 # Note 1
 ```
