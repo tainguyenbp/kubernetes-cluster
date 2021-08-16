@@ -139,7 +139,12 @@ sudo iptables -t mangle -F && sudo iptables -t mangle -X
 sudo systemctl restart docker
 ```
 
-
+# Note 3
+```
+sudo apt-get remove docker-ce kubelet kubeadm kubectl -y
+sudo apt-get purge docker-ce kubeadm kubectl kubelet kubernetes-cni kube* 
+sudo apt autoremove
+```
 
 
 
