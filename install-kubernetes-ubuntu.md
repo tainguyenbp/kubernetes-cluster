@@ -150,6 +150,82 @@ kubectl get pods -n production | grep CrashLoopBackOff | awk '{print $1}' | xarg
 
 kubectl get pods -n production | grep Pending | awk '{print $1}' | xargs kubectl delete pod -n production  --force
 ```
+# Issue fix 
+### Issue fix 1
+```
+root@master01:/home/sysadmin/monitoring/kubernetes# kubectl get cs
+NAME                 STATUS      MESSAGE                                                                                       ERROR
+controller-manager   Unhealthy   Get "http://127.0.0.1:10252/healthz": dial tcp 127.0.0.1:10252: connect: connection refused
+scheduler            Unhealthy   Get "http://127.0.0.1:10251/healthz": dial tcp 127.0.0.1:10251: connect: connection refused
+etcd-0               Healthy     {"health":"true"}
+```
+vim /etc/kubernetes/manifests/kube-scheduler.yaml file and comment line 19  "- --port=0"
+```
+  1 apiVersion: v1
+  2 kind: Pod
+  3 metadata:
+  4   creationTimestamp: null
+  5   labels:
+  6     component: kube-scheduler
+  7     tier: control-plane
+  8   name: kube-scheduler
+  9   namespace: kube-system
+ 10 spec:
+ 11   containers:
+ 12   - command:
+ 13     - kube-scheduler
+ 14     - --authentication-kubeconfig=/etc/kubernetes/scheduler.conf
+ 15     - --authorization-kubeconfig=/etc/kubernetes/scheduler.conf
+ 16     - --bind-address=127.0.0.1
+ 17     - --kubeconfig=/etc/kubernetes/scheduler.conf
+ 18     - --leader-elect=true
+ 19       #    - --port=0
+ 20     image: k8s.gcr.io/kube-scheduler:v1.19.14
+```
+
+vim /etc/kubernetes/manifests/kube-controller-manager.yaml file and comment line 27  "- --port=0"
+```
+apiVersion: v1
+kind: Pod
+metadata:
+  creationTimestamp: null
+  labels:
+    component: kube-controller-manager
+    tier: control-plane
+  name: kube-controller-manager
+  namespace: kube-system
+spec:
+  containers:
+  - command:
+    - kube-controller-manager
+    - --allocate-node-cidrs=true
+    - --authentication-kubeconfig=/etc/kubernetes/controller-manager.conf
+    - --authorization-kubeconfig=/etc/kubernetes/controller-manager.conf
+    - --bind-address=127.0.0.1
+    - --client-ca-file=/etc/kubernetes/pki/ca.crt
+    - --cluster-cidr=10.11.0.0/16
+    - --cluster-name=kubernetes
+    - --cluster-signing-cert-file=/etc/kubernetes/pki/ca.crt
+    - --cluster-signing-key-file=/etc/kubernetes/pki/ca.key
+    - --controllers=*,bootstrapsigner,tokencleaner
+    - --kubeconfig=/etc/kubernetes/controller-manager.conf
+    - --leader-elect=true
+    - --node-cidr-mask-size=24
+      #    - --port=0
+    - --requestheader-client-ca-file=/etc/kubernetes/pki/front-proxy-ca.crt
+    - --root-ca-file=/etc/kubernetes/pki/ca.crt
+```
+restart kubelet on three machines and check cs
+```
+systemctl restart kubelet.service
+
+root@master01:/home/sysadmin/monitoring/kubernetes# kubectl get cs
+NAME                 STATUS    MESSAGE             ERROR
+controller-manager   Healthy   ok
+scheduler            Healthy   ok
+etcd-0               Healthy   {"health":"true"}
+```
+
 
 # Note 1
 ```
