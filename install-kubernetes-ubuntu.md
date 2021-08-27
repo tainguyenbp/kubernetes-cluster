@@ -115,6 +115,7 @@ sudo kubeadm init --control-plane-endpoint "192.1268.1.1:6443" --pod-network-cid
 
 sudo kubeadm init --control-plane-endpoint "192.1268.1.1:6443" --pod-network-cidr=10.15.0.0/16 --upload-certs --v=15
 
+kubeadm init --apiserver-advertise-address="192.1268.1.1" --apiserver-cert-extra-sans="192.1268.1.1" --node-name k8s-master --pod-network-cidr=10.15.0.0/16
 
 kubectl apply -f "https://cloud.weave.works/k8s/net?k8s-version=$(kubectl version | base64 | tr -d '\n')"
 
