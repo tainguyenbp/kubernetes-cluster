@@ -124,7 +124,7 @@ mkdir -p $HOME/.kube
 cp -i /etc/kubernetes/admin.conf $HOME/.kube/config   
 chown $(id -u):$(id -g) $HOME/.kube/config
 ```
-### create token join 1
+### create token join master 1
 ```
 kubeadm init phase upload-certs --upload-certs
 
@@ -134,6 +134,11 @@ kubeadm token create \
 $(kubeadm certs certificate-key)
 
 sudo kubeadm token create --print-join-command --certificate-key `sudo kubeadm init phase upload-certs --upload-certs | sed -n '3 p'`
+```
+
+### create token join worker 1
+```
+kubeadm token create --print-join-command
 ```
 
 ### Certificate Management with kubeadm
@@ -288,6 +293,9 @@ Use following two commands to remove calico from your node:
 
 kubectl delete -f https://docs.projectcalico.org/v3.3/getting-started/kubernetes/installation/hosted/rbac-kdd.yaml
 kubectl delete -f https://docs.projectcalico.org/v3.3/getting-started/kubernetes/installation/hosted/kubernetes-datastore/calico-networking/1.7/calico.yaml
+
+
+To undeploy calico, we have to do the usual kubectl delete -f <yaml>, and then delete a calico conf file in each of the nodes /etc/cni/net.d/. This configuration file along with other binaries are loaded on to the host by the init container.
 ````
 
 
