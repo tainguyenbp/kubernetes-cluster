@@ -223,4 +223,14 @@ kubectl get svc -n monitoring
 
 ```
 
+# Issue fix 
+### Issue fix 1
+```
+access node01 or node02 or node03
+cd /etc/cni/net.d
+
+remove config network calico
+rm -rf 10-calico.conflist calico-kubeconfig
+
+```
 
