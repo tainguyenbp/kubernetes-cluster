@@ -1,5 +1,18 @@
 ### Prometheus & Grafana
 ### Kubernetes (k8s) helm builds Prometheus + Grafana monitoring 1
+### kube prometheus stack
+```
+kube-prometheus-stack is a collection of Kubernetes manifests including the follow:
+    - Prometheus operator
+    - Prometheus
+    - Alertmanager
+    - Prometheus node-exporter
+    - Prometheus Adapter
+    - kube-state-metrics
+    - Grafana
+    - pre-configured to collect metrics from all Kubernetes component
+    - delivers a default set of dashboards and alerting rules
+```
 
 ### Step 1. Install helm version 3 on k8s master01
 ```
