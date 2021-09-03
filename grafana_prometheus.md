@@ -1,5 +1,49 @@
 ### Prometheus & Grafana
-### Kubernetes (k8s) helm builds Prometheus + Grafana monitoring
+### Kubernetes (k8s) helm builds Prometheus + Grafana monitoring 1
+
+### Step 1. Install helm version 3 on k8s master01
+```
+curl -fsSL -o get_helm.sh https://raw.githubusercontent.com/helm/helm/master/scripts/get-helm-3
+chmod 700 get_helm.sh
+./get_helm.sh
+```
+
+### Step 1. Install helm version 3 on k8s master01
+```
+curl -fsSL -o get_helm.sh https://raw.githubusercontent.com/helm/helm/master/scripts/get-helm-3
+chmod 700 get_helm.sh
+./get_helm.sh
+```
+
+### Kubernetes (k8s) helm builds Prometheus + Grafana monitoring 2
+### Step 1. Install helm version 3 on k8s master01
+```
+curl -fsSL -o get_helm.sh https://raw.githubusercontent.com/helm/helm/master/scripts/get-helm-3
+chmod 700 get_helm.sh
+./get_helm.sh
+```
+
+### Step 2. Helm to install prometheus-operator
+```
+helm install stable/prometheus-operator --generate-name
+```
+
+### Step 3. Helm to install prometheus-operator
+```
+helm install stable/prometheus-operator --generate-name
+```
+
+### Step 4. Let’s edit the Service of Prometheus and add IP cluster the type to ClusterIP. Note that your Service name is differ from mine.
+```
+kubectl edit svc prometheus-grafana -n monitoring
+```
+
+
+### Step 8. Let’s edit the Service of Grafana and add IP cluster the type to ClusterIP. Note that your Service name is differ from mine.
+```
+kubectl edit svc prometheus-grafana -n monitoring
+```
+### Kubernetes (k8s) helm builds Prometheus + Grafana monitoring 3
 
 Install NFS and rpcbind service
 ```
@@ -178,3 +222,5 @@ kubectl edit svc -n monitoring prometheus-server
 kubectl get svc -n monitoring
 
 ```
+
+
