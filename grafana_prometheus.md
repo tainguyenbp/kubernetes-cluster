@@ -21,12 +21,45 @@ chmod 700 get_helm.sh
 ./get_helm.sh
 ```
 
-### Step 1. Install helm version 3 on k8s master01
+### Step 2. Install helm version 3 on k8s master01
 ```
-curl -fsSL -o get_helm.sh https://raw.githubusercontent.com/helm/helm/master/scripts/get-helm-3
-chmod 700 get_helm.sh
-./get_helm.sh
+ helm repo add prometheus-community https://prometheus-community.github.io/helm-charts
 ```
+
+### Step 3. Install helm version 3 on k8s master01
+```
+kubectl create namespace prom-monitoring
+```
+
+### Step 4. Install helm version 3 on k8s master01
+```
+helm install prometheus prometheus-community/kube-prometheus-stack -n prom-monitoring
+```
+
+### Step 5. Install helm version 3 on k8s master01
+```
+kubectl get all -n prom-monitoring
+```
+
+### Step 6. Access Prometheus Dashboard
+```
+kubectl port-forward -n prom-monitoring `kubectl get pods -n prom-monitoring | grep "prometheus" | awk '{print $1}'` 9090
+```
+
+### Step 7. Access Grafana Dashboard
+```
+kubectl port-forward -n prom-monitoring prometheus-grafana-79fc544c99-cl7mt 3000
+
+kubectl port-forward -n prom-monitoring `kubectl get pods -n prom-monitoring | grep "grafana" | awk '{print $1}'` 3000
+```
+
+### Uninstall 
+```
+helm uninstall prom -n prom
+```
+
+
+
 
 ### Kubernetes (k8s) helm builds Prometheus + Grafana monitoring 2
 ### Step 1. Install helm version 3 on k8s master01
@@ -48,13 +81,13 @@ helm install stable/prometheus-operator --generate-name
 
 ### Step 4. Let’s edit the Service of Prometheus and add IP cluster the type to ClusterIP. Note that your Service name is differ from mine.
 ```
-kubectl edit svc prometheus-grafana -n monitoring
+kubectl edit svc prometheus-grafana -n prom-monitoring
 ```
 
 
 ### Step 8. Let’s edit the Service of Grafana and add IP cluster the type to ClusterIP. Note that your Service name is differ from mine.
 ```
-kubectl edit svc prometheus-grafana -n monitoring
+kubectl edit svc prometheus-grafana -n prom-monitoring
 ```
 ### Kubernetes (k8s) helm builds Prometheus + Grafana monitoring 3
 
