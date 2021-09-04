@@ -51,6 +51,13 @@ kubectl port-forward -n prom-monitoring `kubectl get pods -n prom-monitoring | g
 kubectl port-forward -n prom-monitoring prometheus-grafana-79fc544c99-cl7mt 3000
 
 kubectl port-forward -n prom-monitoring `kubectl get pods -n prom-monitoring | grep "grafana" | awk '{print $1}'` 3000
+
+kubectl get secret --namespace prom-monitoring
+kubectl get secret --namespace prom-monitoring prometheus-grafana -o yaml
+kubectl get secret prometheus-grafana -n monitoring -o jsonpath="{.data.admin-password}" | base64 --decode ; echo
+
+echo "YWRtaW4=" | base64 --decode && echo ""
+echo "cHJvbS1vcGVyYXRvcg==" | base64 --decode && echo ""
 ```
 
 ### Uninstall 
