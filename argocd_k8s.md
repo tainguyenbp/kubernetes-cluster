@@ -27,3 +27,6 @@ kubectl create namespace argocd
 ```
 kubectl create namespace argocd
 ```
+
+# References
+https://notes.nimtechnology.com/2021/06/20/argocd-su-dung-argocd-deploy-len-k8s/
