@@ -298,3 +298,9 @@ kubectl  get prometheusrule -n prom-monitoring
 kubectl edit <namerule> prometheusrule -n <namespace>
 kubectl edit prometheusrule prometheus-kube-prometheus-alertmanager.rules -n prom-monitoring
 ```
+### Edit rule on prometheus with value helm
+```
+1. Create file value
+kubectl edit prometheusrule prometheus-kube-prometheus-alertmanager.rules -n prom-monitoring
+``````
+
