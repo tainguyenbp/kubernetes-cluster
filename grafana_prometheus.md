@@ -286,4 +286,15 @@ remove config network calico
 rm -rf 10-calico.conflist calico-kubeconfig
 
 ```
-
+# Note
+### Check rule on prometheus
+```
+kubectl -n <namespace> get prometheusrule
+kubectl -n prom-monitoring get prometheusrule
+kubectl  get prometheusrule -n prom-monitoring
+```
+### Edit rule on prometheus
+```
+kubectl edit <namerule> prometheusrule -n <namespace>
+kubectl edit prometheusrule prometheus-kube-prometheus-alertmanager.rules -n prom-monitoring
+```
