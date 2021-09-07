@@ -151,3 +151,82 @@ KUBERNETES_SERVICE_PORT_HTTPS=443
 PWD=/
 KUBERNETES_SERVICE_HOST=10.96.0.1
 ```
+# secret env pod 3
+### create manifest deployment-app.yaml
+```
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: nginxsecretenv
+  namespace: test-deployapp
+data:
+  username: dGFpbmd1eWVuYnAK
+  password: dGFpbmd1eWVuYnBAMTIzCg==
+---
+apiVersion: v1
+kind: Pod
+metadata:
+  name: deployapp
+  namespace: test-deployapp
+spec:
+  containers:
+  - name: nginx
+    image: nginx
+    env:
+      - name: FOO_ENV_VAR
+        valueFrom:
+          configMapKeyRef:
+            name: nginxsecretenv
+            key: username
+      - name: HELLO_ENV_VAR
+        valueFrom:
+          configMapKeyRef:
+            name: nginxsecretenv
+            key: password
+```
+### get infor secret 1
+```
+kubectl get configmap nginxsecretenv -n test-deployapp -o yaml
+```
+### get infor secret 2
+```
+kubectl -n test-deployapp exec deployapp -it -- env | grep _ENV_
+```
+
+
+# secret env pod 4
+## envVar
+### create manifest deployment-app.yaml
+```
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: configsecret
+  namespace: test-deployapp
+data:
+  USERNAME: dGFpbmd1eWVuYnAK
+  PASSWORD: dGFpbmd1eWVuYnBAMTIzCg==
+---
+apiVersion: v1
+kind: Pod
+metadata:
+  name: deployapp
+  namespace: test-deployapp
+spec:
+  containers:
+  - name: nginx
+    image: nginx
+    envFrom:
+      - configMapRef:
+         name: configsecret
+```
+### get infor secret 1
+```
+kubectl get configmap -n test-deployapp
+kubectl get configmap configsecret -n test-deployapp -o yaml
+```
+### get infor secret 2
+```
+kubectl get pods -n test-deployapp
+kubectl -n test-deployapp exec deployapp -it -- env | grep _ENV_
+```
