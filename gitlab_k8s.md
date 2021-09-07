@@ -21,4 +21,7 @@ Initial login
 # Reference:
 ```
 https://docs.gitlab.com/charts/installation/deployment.html
+https://blog.dbi-services.com/deploy-gitlab-on-kubernetes-using-helm/
+https://blog.lwolf.org/post/fully-automated-gitlab-installation-on-kubernetes-including-runner-and-registry/
+https://blog.lwolf.org/post/how-to-easily-deploy-gitlab-on-kubernetes/
 ```
