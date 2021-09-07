@@ -29,7 +29,7 @@ spec:
           command: [ "/bin/sh", "-c", "env" ]
           envFrom:
             - secretRef:
-                name: app_secret
+                name: appsecret
 ```
 
 ### create secret-app.yaml
@@ -37,7 +37,7 @@ spec:
 apiVersion: v1
 kind: Secret
 metadata:
-  name: app_secret
+  name: appsecret
   namespace: test-deployapp
 type: Opaque
 data:
@@ -69,13 +69,13 @@ spec:
           command: [ "/bin/sh", "-c", "env" ]
           envFrom:
             - secretRef:
-                name: app_secret
+                name: appsecret
 ---
 
 apiVersion: v1
 kind: Secret
 metadata:
-  name: app_secret
+  name: appsecret
   namespace: test-deployapp
 type: Opaque
 data:
