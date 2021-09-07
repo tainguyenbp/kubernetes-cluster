@@ -230,3 +230,34 @@ kubectl get configmap configsecret -n test-deployapp -o yaml
 kubectl get pods -n test-deployapp
 kubectl -n test-deployapp exec deployapp -it -- env | grep _ENV_
 ```
+
+# 5. secret env pod 4
+## envVar
+### create manifest deployment-app.yaml
+```
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: deployapp
+  namespace: test-deployapp
+spec:
+  selector:
+    matchLabels:
+      app: deployapp
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: deployapp
+    spec:
+      volumes:
+        - name: config-data-volume
+          configMap:
+            name: app-config
+      containers:
+      - name: testapp
+        image: testapp
+        volumeMounts:
+        - mountPath: /config
+          name: config-data-volume
+```  
