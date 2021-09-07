@@ -23,10 +23,25 @@ kubectl -n argocd port-forward deployment.apps/argocd-server 8080:8080
 ```
 kubectl create namespace argocd
 ```
-### create namespace 
+### get statefulsets 
 ```
-kubectl create namespace argocd
+kubectl get statefulsets -A
+kubectl get sts -A
 ```
+### delete statefulsets 
+```
+kubectl get statefulsets -A
+kubectl get sts -A
+
+kubectl delete sts argocd-redis-ha-server argocd-application-controller -n argocd
+
+kubectl delete sts argocd-redis-ha-server -n argocd
+
+kubectl delete sts argocd-application-controller -n argocd
+```
+
+
+
 
 # References
 https://notes.nimtechnology.com/2021/06/20/argocd-su-dung-argocd-deploy-len-k8s/
