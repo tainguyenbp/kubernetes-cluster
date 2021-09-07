@@ -1,4 +1,4 @@
-# secret env pod 1
+# 1. secret env pod 1
 ### username and password
 ```
 echo "tainguyenbp" | base64
@@ -81,7 +81,7 @@ KUBERNETES_SERVICE_PORT_HTTPS=443
 PWD=/
 KUBERNETES_SERVICE_HOST=10.96.0.1
 ```
-# secret env pod 2
+# 2. secret env pod 2
 ### create secret and deloyment in one file deloyment.yaml
 ```
 apiVersion: apps/v1
@@ -151,7 +151,7 @@ KUBERNETES_SERVICE_PORT_HTTPS=443
 PWD=/
 KUBERNETES_SERVICE_HOST=10.96.0.1
 ```
-# secret env pod 3
+# 3. secret env pod 3
 ### create manifest deployment-app.yaml
 ```
 apiVersion: v1
@@ -194,7 +194,7 @@ kubectl -n test-deployapp exec deployapp -it -- env | grep _ENV_
 ```
 
 
-# secret env pod 4
+# 4. secret env pod 4
 ## envVar
 ### create manifest deployment-app.yaml
 ```
