@@ -1,0 +1,2 @@
+# Install helm
+helm plugin install https://github.com/quintush/helm-unittest
