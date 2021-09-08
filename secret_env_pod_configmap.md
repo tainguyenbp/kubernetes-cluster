@@ -261,3 +261,8 @@ spec:
         - mountPath: /config
           name: config-data-volume
 ```  
+
+# Reference:
+```
+https://cloudfun.vn/threads/tim-hieu-cach-dinh-cau-hinh-ung-dung-kubernetes-bang-configmap.399/
+```
