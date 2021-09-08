@@ -232,7 +232,7 @@ kubectl -n test-deployapp exec deployapp -it -- env | grep _ENV_
 ```
 
 # 5. secret env pod 4
-## envVar
+## mount file
 ### create manifest deployment-app.yaml
 ```
 apiVersion: apps/v1
