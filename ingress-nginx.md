@@ -1,3 +1,46 @@
+
+### Reference:
+```
+kubectl apply -f https://raw.githubusercontent.com/kubernetes/ingress-nginx/controller-v1.0.0/deploy/static/provider/baremetal/deploy.yaml
+```
+
+### Reference:
+```
+kubectl get pods -n ingress-nginx -l app.kubernetes.io/name=ingress-nginx --watch
+```
+
+### Reference:
+```
+
+```
+
+
+### Reference:
+```
+
+```
+
+
+### Reference:
+```
+
+```
+
+### Reference:
+```
+
+```
+
+### Reference:
+```
+
+```
+
+### Reference:
+```
+
+```
+
 # Reference:
 ```
 https://platform9.com/blog/building-a-complete-stack-ingress-controllers/
