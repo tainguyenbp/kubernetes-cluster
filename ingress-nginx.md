@@ -2,17 +2,21 @@
 ### Reference:
 ```
 kubectl apply -f https://raw.githubusercontent.com/kubernetes/ingress-nginx/controller-v1.0.0/deploy/static/provider/baremetal/deploy.yaml
+kubectl apply -f https://raw.githubusercontent.com/kubernetes/ingress-nginx/controller-v0.34.1/deploy/static/provider/baremetal/deploy.yaml
 ```
 
 ### Reference:
 ```
 kubectl get pods -n ingress-nginx -l app.kubernetes.io/name=ingress-nginx --watch
+kubectl describe service -n ingress-nginx ingress-nginx-controller
 ```
 
 ### Reference:
 ```
 
 ```
+
+
 
 
 ### Reference:
@@ -52,4 +56,5 @@ https://www.itblognote.com/2021/04/how-to-install-nginx-ingress-cert-manager-kub
 https://nvtienanh.info/devops/cai-ingress-nginx-tren-kubernetes-on-premise-20210113/
 https://www.ovh.com/blog/getting-external-traffic-into-kubernetes-clusterip-nodeport-loadbalancer-and-ingress/
 https://lazyadmin.info/setup-ingress-tren-kubernetes-bang-nginx-controller/
+https://medium.com/m/global-identity?redirectUrl=https%3A%2F%2Fitnext.io%2Fbare-metal-kubernetes-with-kubeadm-nginx-ingress-controller-and-haproxy-bb0a7ef29d4e
 ```
