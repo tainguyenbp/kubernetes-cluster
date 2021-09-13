@@ -10,6 +10,8 @@ kubeadm init --control-plane-endpoint="92.1268.1.1:6443" --upload-certs --apiser
   curl -fsSL https://download.docker.com/linux/ubuntu/gpg | apt-key add -
   add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable"
   apt update && apt install -y docker-ce=5:19.03.10~3-0~ubuntu-focal containerd.io docker-ce-cli=5:19.03.10~3-0~ubuntu-focal
+  
+  apt update && apt install -y kubelet=1.19.14-00 kubeadm=1.19.14-00 kubectl=1.19.14-00
 ```
 
 ```
