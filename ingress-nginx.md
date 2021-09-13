@@ -18,8 +18,12 @@ helm repo update
 kubectl create ns ingress-nginx
 helm install ingress-nginx -n ingress-nginx ingress-nginx/ingress-nginx
 ```
-
-
+### add ip ingress-nginx-controller:
+```
+  externalIPs:
+  - 192.168.0.10
+  - 192.168.0.10
+```
 ### template:
 ```
 NAME: ingress-nginx
