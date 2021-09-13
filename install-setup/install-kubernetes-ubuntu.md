@@ -280,8 +280,11 @@ kubectl delete node master02
 
 # Note 3
 ```
-sudo apt-get remove docker-ce kubelet kubeadm kubectl -y
+sudo apt-get remove docker-ce kubelet kubeadm kubectl -
 sudo apt-get purge docker-ce kubeadm kubectl kubelet kubernetes-cni kube* 
+sudo apt autoremove
+sudo apt-get remove docker-ce container.io
+sudo apt-get purge docker-ce container.io
 sudo apt autoremove
 
 
