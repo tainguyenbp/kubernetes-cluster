@@ -1,6 +1,8 @@
 # Set up a Highly Available Kubernetes Cluster using kubeadm
 
 ```
+kubeadm init --apiserver-advertise-address 49.232.211.230 --pod-network-cidr=10.244.0.0/16 -v=9
+
 kubeadm init --pod-network-cidr 10.244.0.0/16
 
 sudo kubeadm init --control-plane-endpoint "192.1268.1.1:6443" --pod-network-cidr=10.244.0.0/16 --upload-certs --v=15
