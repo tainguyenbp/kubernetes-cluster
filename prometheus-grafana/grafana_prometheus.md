@@ -23,8 +23,11 @@ chmod 700 get_helm.sh
 
 ### Step 2. Install helm version 3 on k8s master01
 ```
- helm repo add prometheus-community https://prometheus-community.github.io/helm-charts
+helm repo add prometheus-community https://prometheus-community.github.io/helm-charts
+
+helm search repo prometheus-community
 ```
+
 
 ### Step 3. Install helm version 3 on k8s master01
 ```
