@@ -1,5 +1,5 @@
-### Prometheus & Grafana
-### Kubernetes (k8s) helm builds Prometheus + Grafana monitoring 1
+# Prometheus & Grafana
+# Kubernetes (k8s) helm builds Prometheus + Grafana monitoring 1
 ### kube prometheus stack
 ```
 kube-prometheus-stack is a collection of Kubernetes manifests including the follow:
@@ -63,15 +63,22 @@ echo "YWRtaW4=" | base64 --decode && echo ""
 echo "cHJvbS1vcGVyYXRvcg==" | base64 --decode && echo ""
 ```
 
+### Step 8. Install blackbox exporter
+```
+helm install blackbox-exporter prometheus-community/prometheus-blackbox-exporter -n prom-monitoring
+helm upgrade --reuse-values -f prometheus-blackbox-exporter/values.yaml blackbox-exporter -n prom-monitoring prometheus-community/prometheus-blackbox-exporter
+kubectl get configmap blackbox-exporter-prometheus-blackbox-exporter -n monitoring -o yaml
+```
+
+
+
 ### Uninstall 
 ```
 helm uninstall prom -n prom
 ```
 
 
-
-
-### Kubernetes (k8s) helm builds Prometheus + Grafana monitoring 2
+# Kubernetes (k8s) helm builds Prometheus + Grafana monitoring 2
 ### Step 1. Install helm version 3 on k8s master01
 ```
 curl -fsSL -o get_helm.sh https://raw.githubusercontent.com/helm/helm/master/scripts/get-helm-3
@@ -99,7 +106,9 @@ kubectl edit svc prometheus-grafana -n prom-monitoring
 ```
 kubectl edit svc prometheus-grafana -n prom-monitoring
 ```
-### Kubernetes (k8s) helm builds Prometheus + Grafana monitoring 3
+
+
+# Kubernetes (k8s) helm builds Prometheus + Grafana monitoring 3
 
 Install NFS and rpcbind service
 ```
