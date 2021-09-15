@@ -14,7 +14,13 @@ mkdir -p ~/lima/
 ### touch ~/lima/Dockerfile
 ```
 FROM nginx
-RUN  echo "hello lima" > /usr/share/nginx/html/index.html
+RUN  echo "hello tainn" > /usr/share/nginx/html/index.html
+```
+
+### build lima
+```
+lima nerdctl build -t lima-tainn:v1.0 ~/lima
+lima nerdctl run -d -p 127.0.0.1:8080:80 lima-tainn:v1.0
 ```
 
 ### Run nginx container inside Lima VM
