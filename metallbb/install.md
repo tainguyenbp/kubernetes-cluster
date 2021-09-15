@@ -29,3 +29,8 @@ data:
       - 172.42.42.100-172.42.42.105
 
 ```
+### Step 3: Create your service to get an external IP (would be a private IP though).
+### After MetalLB installation
+```
+kubectl get svc -A
+```
