@@ -1,4 +1,4 @@
-# debug
+# debug network linux
 ### TCP
 ```
 nc -n -v -z 192.168.10.100 443
