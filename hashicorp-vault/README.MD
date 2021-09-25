@@ -1,7 +1,7 @@
 # Install vault
 ### Step 1. 
 ```
-sudo mkdir -p /opt/vault/{logs,bin,data}
+sudo mkdir -p /opt/vault/{logs,bin,data,tls}
 
 ```
 
@@ -19,7 +19,7 @@ sudo touch /etc/vault/config.json
 
 ```
 
-### Step 1. vim /etc/vault/config.json
+### Step 1. vim /etc/vault/config.json http
 ```
   "listener": [{
     "tcp": {
@@ -37,6 +37,74 @@ sudo touch /etc/vault/config.json
   "default_lease_ttl": "10h",
   "ui":true
  }
+```
+
+### Step 1. vim /etc/vault/config.json https
+```
+  "listener": [{
+    "tcp": {
+      "address" : "0.0.0.0:8200",
+      "tls_disable" : 1
+    }
+  }],
+  "api_addr": "http://127.0.0.1:8200",
+  "storage": {
+     "file": {
+       "path" : "/opt/vault/data"
+     }
+  },
+  "max_lease_ttl": "10h",
+  "default_lease_ttl": "10h",
+  "ui":true
+ }
+```
+
+### Step 1. Script generate tls
+```
+
+#!/bin/bash
+CURRENT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+
+PATH_TLS='/opt/vault/'
+
+name='vault'
+domain_cert_ssl=""$name".tainn.local"
+email_cert_ssl=""$name".tainn.local"
+
+openssl req -new -newkey rsa:4096 -sha256 -days 1095 -nodes -x509 -keyout "$PATH_TLS$domain_cert_ssl".key -out "$PATH_TLS$domain_cert_ssl".crt \
+                -subj "/C=VN/ST=HCM/L=HCM/O=DR/OU=DR/CN=$domain_cert_ssl/emailAddress=$email_cert_ssl"
+
+openssl x509 -in "$PATH_TLS$domain_cert_ssl".crt -text
+chown -R vault:vault $PATH_TLS
+```
+### Step 1. vim /etc/vault/vault.hcl
+```
+ui = true
+
+#mlock = true
+#disable_mlock = true
+
+storage "file" {
+  path = "/opt/vault/data"
+}
+
+#storage "consul" {
+#  address = "127.0.0.1:8500"
+#  path    = "vault"
+#}
+
+# HTTP listener
+#listener "tcp" {
+#  address = "127.0.0.1:8200"
+#  tls_disable = 1
+#}
+
+# HTTPS listener
+listener "tcp" {
+  address       = "0.0.0.0:8200"
+  tls_cert_file = "/opt/vault/tls/vautl.tainn.local.crt"
+  tls_key_file  = "/opt/vault/tls/vautl.tainn.local.key"
+}
 ```
 
 ### Step 1. vim /etc/systemd/system/vault.service
@@ -91,4 +159,22 @@ echo "export PATH=$PATH:/opt/vault/bin" >> ~/.bashrc
 ```
 export VAULT_ADDRESS='http://127.0.0.1:8200'
 echo "export VAULT_ADDR=http://127.0.0.1:8200" >> ~/.bashrc
+```
+
+### Initialize vault to get the keys.
+```
+vault operator init
+```
+### You can also access the vault UI on port 8200 of your vault server. Login with token root key which we created with init.
+```
+http://127.0.0.1:8200/ui/
+http://127.0.0.1:8200/ui/
+```
+
+# Reference:
+```
+https://learn.hashicorp.com/tutorials/vault/raft-storage
+https://www.digitalonus.com/how-to-set-up-a-hashicorp-vault-cluster-in-15-minutes/
+https://learn.hashicorp.com/tutorials/vault/ha-with-consul
+
 ```
