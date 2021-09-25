@@ -65,7 +65,7 @@ sudo touch /etc/vault/config.json
 #!/bin/bash
 CURRENT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 
-PATH_TLS='/opt/vault/'
+PATH_TLS='/opt/vault/tls/'
 
 name='vault'
 domain_cert_ssl=""$name".tainn.local"
