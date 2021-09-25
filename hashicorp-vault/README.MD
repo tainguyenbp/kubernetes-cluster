@@ -166,6 +166,12 @@ echo "export VAULT_ADDR=http://127.0.0.1:8200" >> ~/.bashrc
 ```
 vault operator init
 ```
+### To check the status
+```
+vault status
+
+```
+
 ### You can also access the vault UI on port 8200 of your vault server. Login with token root key which we created with init.
 ```
 http://127.0.0.1:8200/ui/
