@@ -103,8 +103,8 @@ storage "file" {
 # HTTPS listener
 listener "tcp" {
   address       = "0.0.0.0:8200"
-  tls_cert_file = "/opt/vault/tls/vautl.tainn.local.crt"
-  tls_key_file  = "/opt/vault/tls/vautl.tainn.local.key"
+  tls_cert_file = "/opt/vault/tls/vault.tainn.local.crt"
+  tls_key_file  = "/opt/vault/tls/vault.tainn.local.key"
 }
 ```
 
@@ -160,9 +160,12 @@ echo "export PATH=$PATH:/opt/vault/bin" >> ~/.bashrc
 ```
 export VAULT_ADDRESS='http://127.0.0.1:8200'
 echo "export VAULT_ADDR=http://127.0.0.1:8200" >> ~/.bashrc
+
+export VAULT_ADDRESS='https://127.0.0.1:8200'
+echo "export VAULT_ADDR=https://127.0.0.1:8200" >> ~/.bashrc
 ```
 
-### Initialize vault to get the keys.
+### Initialize vault to get the keys. Initialize and Unseal your Vault
 ```
 vault operator init
 ```
@@ -177,6 +180,24 @@ vault status
 http://127.0.0.1:8200/ui/
 http://127.0.0.1:8200/ui/
 ```
+### Adding trusted root certificates to the server
+```
+Install the ca-certificates package: yum install ca-certificates
+Enable the dynamic CA configuration feature: update-ca-trust force-enable
+Add it as a new file to /etc/pki/ca-trust/source/anchors/: cp -r /opt/vault/tls/vault.tainn.local.crt /etc/pki/ca-trust/source/anchors/
+Use command: update-ca-trust extract
+```
+
+### Noted: debug
+```
+curl -k -v https://127.0.0.1:8200/v1/sys/seal-status
+
+curl -k --header "X-Vault-Token:$VAULT_TOKEN" https://127.0.0.1:8200/v1/sys/auth/approle
+export VAULT_TOKEN=""
+
+```
+
+
 
 # Reference:
 ```
