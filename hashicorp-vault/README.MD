@@ -208,8 +208,15 @@ openssl req -new -x509 -days 365 -key ca.key -subj "/C=CN/ST=GD/L=SZ/O=Acme, Inc
 openssl req -newkey rsa:2048 -nodes -keyout server.key -subj "/C=CN/ST=GD/L=SZ/O=Acme, Inc./CN=*.example.com" -out server.csr
 openssl x509 -req -extfile <(printf "subjectAltName=DNS:example.com,DNS:www.example.com") -days 365 -in server.csr -CA ca.crt -CAkey ca.key -CAcreateserial -out server.crt
 ```
+### Issue 1: Solution export VAULT_TOKEN="s.Epg88vI8AayR2o7oNNohyS5Q", Initial Root Token: s.Epg88vI8AayR2o7oNNohyS5Q
+```
+Error enabling approle auth: Error making API request.
 
+URL: POST http://127.0.0.1:8200/v1/sys/auth/approle
+Code: 403. Errors:
 
+* permission denied
+```
 # Reference:
 ```
 https://learn.hashicorp.com/tutorials/vault/raft-storage
