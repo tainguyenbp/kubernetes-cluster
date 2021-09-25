@@ -64,18 +64,31 @@ KillSignal=SIGTERM
 WantedBy=multi-user.target
 ```
 
+
+
+### Step 1. 
+```
+sudo useradd -r vault
+
+sudo chown -R vault:vault /opt/vault
+
+chown -R vault:vault /etc/vault
+```
+
 ### Step 1. 
 ```
 systemctl start vault
 systemctl status vault
 ```
 
-### Step 1. 
+### Step 1. Add the Vault bin directory to your PATH environment variable.
+```
+export PATH=$PATH:/opt/vault/bin
+echo "export PATH=$PATH:/opt/vault/bin" >> ~/.bashrc
 ```
 
+### Step 1. Set environment variables for Vault
 ```
-
-### Step 1. 
-```
-
+export VAULT_ADDRESS=http://127.0.0.1:8200
+echo "export VAULT_ADDR=http://127.0.0.1:8200" >> ~/.bashrc
 ```
