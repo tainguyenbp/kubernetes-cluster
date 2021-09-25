@@ -182,6 +182,16 @@ vault status
 http://127.0.0.1:8200/ui/
 http://127.0.0.1:8200/ui/
 ```
+### To enable API access you will use the vault auth enable command
+```
+vault auth enable approle
+```
+
+### must enable the secrets feature
+```
+vault secrets enable -version=2 -path=secret kv
+```
+
 ### Adding trusted root certificates to the server
 ```
 Install the ca-certificates package: yum install ca-certificates
