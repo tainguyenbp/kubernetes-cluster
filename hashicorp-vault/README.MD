@@ -44,7 +44,8 @@ sudo touch /etc/vault/config.json
   "listener": [{
     "tcp": {
       "address" : "0.0.0.0:8200",
-      "tls_disable" : 1
+      "tls_cert_file" : "/opt/vault/tls/vault.tainguyenbp.local.crt",
+      "tls_key_file" : "/opt/vault/tls/vault.tainguyenbp.local.key"
     }
   }],
   "api_addr": "http://127.0.0.1:8200",
@@ -68,8 +69,8 @@ CURRENT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 PATH_TLS='/opt/vault/tls/'
 
 name='vault'
-domain_cert_ssl=""$name".tainn.local"
-email_cert_ssl=""$name".tainn.local"
+domain_cert_ssl=""$name".tainguyenbp.local"
+email_cert_ssl=""$name".tainguyenbp.local"
 
 openssl req -new -newkey rsa:4096 -sha256 -days 1095 -nodes -x509 -keyout "$PATH_TLS$domain_cert_ssl".key -out "$PATH_TLS$domain_cert_ssl".crt \
                 -subj "/C=VN/ST=HCM/L=HCM/O=DR/OU=DR/CN=$domain_cert_ssl/emailAddress=$email_cert_ssl"
