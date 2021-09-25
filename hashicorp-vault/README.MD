@@ -159,8 +159,10 @@ echo "export PATH=$PATH:/opt/vault/bin" >> ~/.bashrc
 ### Step 1. Set environment variables for Vault
 ```
 export VAULT_ADDRESS='http://127.0.0.1:8200'
+
 echo "export VAULT_ADDR=http://127.0.0.1:8200" >> ~/.bashrc
 
+export VAULT_ADDR='https://127.0.0.1:8200'
 export VAULT_ADDRESS='https://127.0.0.1:8200'
 echo "export VAULT_ADDR=https://127.0.0.1:8200" >> ~/.bashrc
 ```
@@ -186,6 +188,8 @@ Install the ca-certificates package: yum install ca-certificates
 Enable the dynamic CA configuration feature: update-ca-trust force-enable
 Add it as a new file to /etc/pki/ca-trust/source/anchors/: cp -r /opt/vault/tls/vault.tainn.local.crt /etc/pki/ca-trust/source/anchors/
 Use command: update-ca-trust extract
+/etc/pki/ca-trust/source/anchors/
+update-ca-trust
 ```
 
 ### Noted: debug
@@ -196,7 +200,14 @@ curl -k --header "X-Vault-Token:$VAULT_TOKEN" https://127.0.0.1:8200/v1/sys/auth
 export VAULT_TOKEN=""
 
 ```
+### CA
+```
+openssl genrsa -out ca.key 2048
+openssl req -new -x509 -days 365 -key ca.key -subj "/C=CN/ST=GD/L=SZ/O=Acme, Inc./CN=Acme Root CA" -out ca.crt
 
+openssl req -newkey rsa:2048 -nodes -keyout server.key -subj "/C=CN/ST=GD/L=SZ/O=Acme, Inc./CN=*.example.com" -out server.csr
+openssl x509 -req -extfile <(printf "subjectAltName=DNS:example.com,DNS:www.example.com") -days 365 -in server.csr -CA ca.crt -CAkey ca.key -CAcreateserial -out server.crt
+```
 
 
 # Reference:
