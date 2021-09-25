@@ -89,6 +89,6 @@ echo "export PATH=$PATH:/opt/vault/bin" >> ~/.bashrc
 
 ### Step 1. Set environment variables for Vault
 ```
-export VAULT_ADDRESS=http://127.0.0.1:8200
+export VAULT_ADDRESS='http://127.0.0.1:8200'
 echo "export VAULT_ADDR=http://127.0.0.1:8200" >> ~/.bashrc
 ```
