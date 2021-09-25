@@ -106,6 +106,39 @@ listener "tcp" {
   tls_cert_file = "/opt/vault/tls/vault.tainn.local.crt"
   tls_key_file  = "/opt/vault/tls/vault.tainn.local.key"
 }
+
+
+      ui = true
+
+      api_addr = "https://127.0.0.1:8200" # Unsure if this is correct
+
+      storage "dynamodb" {
+        ha_enabled = "true"
+        region     = "eu-west-2"
+        table      = "global-vault-data"
+        access_key = "KEY"
+        secret_key = "SECRET"
+      }
+
+      # listener "tcp" {
+      #     address = "0.0.0.0:8200"
+      #     tls_disable = "true"
+      # }
+
+      listener "tcp" {
+        address = "0.0.0.0:8200"
+        cluster_address = "0.0.0.0:8201"
+        tls_cert_file = "/vault/userconfig/vault-server-tls/vault.crt"
+        tls_key_file  = "/vault/userconfig/vault-server-tls/vault.key"
+        tls_client_ca_file = "/vault/userconfig/vault-server-tls/vault.ca"
+      }
+
+      seal "awskms" {
+        region     = "eu-west-2"
+        access_key = "KEY"
+        secret_key = "SECRET"
+        kms_key_id = "ID"
+      }
 ```
 
 ### Step 1. vim /etc/systemd/system/vault.service
