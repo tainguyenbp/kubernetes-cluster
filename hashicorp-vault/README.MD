@@ -218,11 +218,63 @@ http://127.0.0.1:8200/ui/
 ### To enable API access you will use the vault auth enable command
 ```
 vault auth enable approle
+Success! Enabled approle auth method at: approle/
+
+# vault auth enable kubernetes
+Success! Enabled kubernetes auth method at: kubernetes/
+
+# vault auth enable userpass
+Success! Enabled userpass auth method at: userpass/
+
+# vault auth enable ldap
+ Success! Enabled ldap auth met
 ```
 
 ### must enable the secrets feature
 ```
 vault secrets enable -version=2 -path=secret kv
+```
+
+### test vault
+```
+vault auth list
+
+vault secrets list
+
+vault kv put secret/databases/db1 username=tainn
+
+vault kv put secret/databases/db1 password=passw0rd
+
+```
+### Version 1: 
+```
+vault kv get secret/databases/db1 
+
+vault kv get -format=json secret/databases/db1
+
+vault kv get -field=username  secret/databases/db1
+
+vault kv delete secret/databases/db1
+
+vault kv get secret/databases/db1
+```
+### Version 2: 
+```
+
+Key metadata:
+vault kv metadata get secret/databases/db1
+
+Detele:
+vault kv delete secret/databases/db1
+
+Undeleted:
+vault kv undelete -versions=2 secret/databases/db1
+
+Destroying permanently:
+vault kv destroy -versions=2 secret/databases/db1
+
+Permanently delete all:
+vault kv metadata delete secret/databases/db1
 ```
 
 ### Adding trusted root certificates to the server
