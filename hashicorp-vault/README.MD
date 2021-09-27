@@ -248,6 +248,7 @@ vault kv put secret/databases/db1 password=passw0rd
 ```
 ### Version 1: 
 ```
+vault kv get -version=1 secret/databases/db1
 vault kv get secret/databases/db1 
 
 vault kv get -format=json secret/databases/db1
@@ -260,6 +261,7 @@ vault kv get secret/databases/db1
 ```
 ### Version 2: 
 ```
+vault kv get -version=2 secret/databases/db1
 
 Key metadata:
 vault kv metadata get secret/databases/db1
