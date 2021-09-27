@@ -208,6 +208,10 @@ export VAULT_ADDR='http://127.0.0.1:8200'
 ### Initialize vault to get the keys. Initialize and Unseal your Vault
 ```
 vault operator init
+
+vault operator unseal aUEvSKm/O9CQhQspwNFcHYuabF1uD1m7FpMmo7f5AVau
+vault operator unseal EjLBTmuaeZgEl8kGWJIuJhhWYNVCLEEqKEA7I6i4FjpF
+vault operator unseal tVSkHbcUqhLzOlKbwWWJkoLDPemZNoDWXrXbPIU3Zfad
 ```
 ### To check the status
 ```
