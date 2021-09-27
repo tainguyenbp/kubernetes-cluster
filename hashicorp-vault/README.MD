@@ -199,6 +199,10 @@ echo "export VAULT_ADDR=http://127.0.0.1:8200" >> ~/.bashrc
 export VAULT_ADDR='https://127.0.0.1:8200'
 export VAULT_ADDRESS='https://127.0.0.1:8200'
 echo "export VAULT_ADDR=https://127.0.0.1:8200" >> ~/.bashrc
+
+
+export VAULT_TOKEN=""
+export VAULT_ADDR='http://127.0.0.1:8200'
 ```
 
 ### Initialize vault to get the keys. Initialize and Unseal your Vault
@@ -218,6 +222,7 @@ http://127.0.0.1:8200/ui/
 ```
 ### To enable API access you will use the vault auth enable command
 ```
+
 vault auth enable approle
 Success! Enabled approle auth method at: approle/
 
@@ -229,6 +234,7 @@ Success! Enabled userpass auth method at: userpass/
 
 # vault auth enable ldap
  Success! Enabled ldap auth met
+ 
 ```
 
 ### must enable the secrets feature
@@ -295,7 +301,7 @@ update-ca-trust
 curl -k -v https://127.0.0.1:8200/v1/sys/seal-status
 
 curl -k --header "X-Vault-Token:$VAULT_TOKEN" https://127.0.0.1:8200/v1/sys/auth/approle
-export VAULT_TOKEN=""
+export VAULT_TOKEN=''
 
 ```
 ### CA
