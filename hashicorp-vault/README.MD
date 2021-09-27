@@ -41,6 +41,7 @@ sudo touch /etc/vault/config.json
 
 ### Step 1. vim /etc/vault/config.json https
 ```
+{
   "listener": [{
     "tcp": {
       "address" : "0.0.0.0:8200",
