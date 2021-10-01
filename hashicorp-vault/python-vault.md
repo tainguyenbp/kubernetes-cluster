@@ -8,6 +8,19 @@ client.write("ssh/creeds/role", 30, {'ip':'xxx.xxx.xxx.xxx'})
 
 ### Get infor vault 1
 ```
+root@lxd-home:/home/fakrul# vault kv get secret/meraki
+====== Metadata ======
+Key Value
+--- -----
+created_time 2020-06-05T15:13:18.320931138Z
+deletion_time n/a
+destroyed false
+version 1
+========== Data ==========
+Key Value
+--- -----
+MERAKI_API_VALUE de300b8b9xxxxxxxxxxxxxxxxxxxxxxxxx40fb4391c
+
 python3 -m pip hvac
 
 
