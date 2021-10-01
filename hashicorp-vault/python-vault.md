@@ -49,3 +49,9 @@ for i in switch_list:
  
 print(switch_serial)
 ```
+# Reference:
+```
+https://hvac.readthedocs.io/en/stable/overview.html#installation
+https://fakrul.wordpress.com/2020/06/04/how-to-hide-password-api-key-in-python-script/
+https://fakrul.wordpress.com/2020/06/06/python-script-credentials-stored-in-hashicorp-vault/
+```
