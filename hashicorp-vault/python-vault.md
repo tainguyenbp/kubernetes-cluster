@@ -54,4 +54,7 @@ print(switch_serial)
 https://hvac.readthedocs.io/en/stable/overview.html#installation
 https://fakrul.wordpress.com/2020/06/04/how-to-hide-password-api-key-in-python-script/
 https://fakrul.wordpress.com/2020/06/06/python-script-credentials-stored-in-hashicorp-vault/
+https://stackoverflow.com/questions/56502231/write-secrets-to-vault-using-python-hvac
+https://stackoverflow.com/questions/68907482/vault-read-secrets-with-python
+https://stackoverflow.com/questions/55030523/hashicorp-vault-python-hvac-read
 ```
