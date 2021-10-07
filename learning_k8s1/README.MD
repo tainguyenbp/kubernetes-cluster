@@ -180,10 +180,10 @@ k8s-worker-02.tainn.local    Ready    <none>   82s   v1.18.6
 ### Check infor 1 node in the k8s cluster:
 ```
 [root@k8s-master-01 ~]# kubectl describe node/k8s-worker-01.tainn.local
-
 ```
-***************Cấu hình kubectl client truy cập đến các Cluster:
-- Kiểm tra cấu hình ban đầu:
+
+### Config kubectl client access to Cluster:
+```
 [root@client ~]# kubectl config view
 apiVersion: v1
 clusters: null
@@ -236,6 +236,7 @@ export KUBECONFIG=~/.kube/config:~/.kube/config-mycluster
 kubectl config view --flatten > ~/.kube/config_temp
 mv ~/.kube/config_temp ~/.kube/config
 kubectl config get-contexts
+```
 
 ### symboy * is current context, if you want to change to context kubernetes-admin@kubernetes then you can run comand:
 ```
