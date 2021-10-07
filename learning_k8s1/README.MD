@@ -148,7 +148,6 @@ kube-system   kube-scheduler-k8s-master-01.tainn.local              1/1     Runn
 W0808 21:45:17.466412   33225 configset.go:202] WARNING: kubeadm cannot validate component configs for API groups [kubelet.config.k8s.io kubeproxy.config.k8s.io]
 kubeadm join 192.168.1.10:6443 --token 9pmzz9.vqew8c5cahueky0v     --discovery-token-ca-cert-hash sha256:2357d1be0a1471f5f1f1e11761f61c3d682630d21b3214591485a9fdcdc7b533
 ```
-```
 ### Join Worker to cluster
 ```
 - Thực hiện kết nối Node vào Cluster với token ở trên:
@@ -194,17 +193,17 @@ kind: Config
 preferences: {}
 users: null
 
-[root@client ~]# scp root@192.168.139.10:/etc/kubernetes/admin.conf ~/.kube/config-mycluster
-root@192.168.139.10's password:
+[root@tainn-kubeadm ~]# scp root@192.168.1.10:/etc/kubernetes/admin.conf ~/.kube/config-mycluster
+root@192.168.1.10's password:
 admin.conf                                                                                                                            100% 5454     4.9MB/s   00:00
 
-[root@client ~]# export KUBECONFIG=/root/.kube/config-mycluster
-[root@client ~]# kubectl config view
+[root@tainn-kubeadm ~]# export KUBECONFIG=/root/.kube/config-mycluster
+[root@tainn-kubeadm ~]# kubectl config view
 apiVersion: v1
 clusters:
 - cluster:
     certificate-authority-data: DATA+OMITTED
-    server: https://192.168.139.10:6443
+    server: https://192.168.1.10:6443
   name: kubernetes
 contexts:
 - context:
