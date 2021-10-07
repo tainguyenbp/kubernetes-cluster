@@ -242,3 +242,30 @@ kubectl config get-contexts
 ```
 kubectl config use-context kubernetes-admin@kubernetes
 ```
+### noted workload:
+```
+1. Pod: one pod, one process, one container, context (namespace and cgroups)
+
+2. Deployment: trên đơn vị pod thì có deployment, để quản lý pod và replicaset, tính năng rollback, rollout.
+
+3. Statefullset: quản lý pod, đảm bảo pod persit vs nhau về tài nguyên network, store
+
+4. DaemonSet: mục đích để chạy và trải đều pod lên các node, thường logging sẽ chạy
+
+5. Job: Tạo 1 crontab vào images, pod, container khi chạy xong sẽ terminiting
+
+6. CronJob: định kỳ 1 tuần chạy 1 lần, nếu failed 3 lần thì sẽ termnating
+
+7. Network 2 component:
+- Service: cung cấp cách thức expose layer4 của pod, giúp user và service bên ngoài access vào resouce con pod chạy trên kubernetes, service loadbalance cho toàn bộ pods bên trong nó
+
+- Ingress: cách k8s expose connect user có thể truy cập thông qua layer7 HTTP/HTTPS
+
+8. Stogress:
+8.1 Volume: sẽ đi cùng với sự sống của pod, nếu pod sống thì volume sống, pod chết thì toàn bộ data trong volume chết
+
+8.2 PV - PersistentVolume: Volume sẽ dc gán vào pods và khi pods chết sẽ k mất, có thể sử dụng external storage: CEPH, Minio, NFS...
+
+8.3 PCV - PersistentVolumeClaim:  
+
+```
