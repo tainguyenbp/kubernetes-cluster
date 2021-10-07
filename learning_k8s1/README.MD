@@ -266,6 +266,24 @@ kubectl config use-context kubernetes-admin@kubernetes
 
 8.2 PV - PersistentVolume: Volume sẽ dc gán vào pods và khi pods chết sẽ k mất, có thể sử dụng external storage: CEPH, Minio, NFS...
 
-8.3 PCV - PersistentVolumeClaim:  
+8.3 PCV - PersistentVolumeClaim: admin chuẩn bị volume cho user nghĩa là tạo ra không gian lưu trữ có sắn, nếu user develop application chạy trong k8s nếu như có nhu cầu muốn sử dụng 1 không gian lưu trữ khi ứng dụng down reset data vẫn còn, trỏ selector label để sử dụng PV
 
-```
+8.4 StorageClass: không cần người quản trị phải tạo manual pvc, chỉ cần tạo 1 class nếu có user hoặc application đó muốn sử dunng thì gọi đến class đó, nó sẽ tự động dynamic tạo ra cho những user và app persistentvoluome tương ứng. Lúc này by pass qua dc bước tạo PV mneen chỉ cần tạo class
+-> ứng dụng tốt trên môi trường cloud, 
+
+9. Configuration: 
+9.1 configmap: cùng 1 ứng dụng chạy nhưng khác nhau enn dev, stg, prod, mapping configrution cụ thể trên một môi trường nào đó.
+
+9.2 secret: cần bảo mật credential, k muốn user nhìn thấy trong env, tạo secret và encode lưu trữ token, password, user
+
+10. Auth and Identity (RBAC): ai dc truy cập vào cluster và truy cập được những gì, có role và cluster role
+- role sẽ ảnh hưởng trên 1 namespace
+- cluster role sẽ ảnh hưởng trên cluster trong đó sẽ dùng dc namespace, tất cả các ns có trong cluster đó
+
+10.1 cluster role: Chạy quyền get, list hoặc role admin
+
+10.2 cluster rolebinding: phân quyền cho svc, group, user, dc dùng kịch bản do admin soạn ra sẵn
+
+
+10.3 ServiceAccount: 
+````
