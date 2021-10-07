@@ -228,7 +228,7 @@ k8s-worker-02.tainn.local   Ready    <none>   16m   v1.18.6
 [root@tainn-kubeadm .kube]# kubectl config get-contexts
 CURRENT   NAME                          CLUSTER      AUTHINFO           NAMESPACE
 *         kubernetes-admin@kubernetes   kubernetes   kubernetes-admin
-[root@client .kube]#
+[root@tainn-kubeadm .kube]#
 
 
 ### config for admin k8s with multi cluster, example I have the Kube Cluster config file  ~/.kube/config:
