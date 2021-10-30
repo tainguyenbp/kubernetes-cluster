@@ -24,6 +24,8 @@ Extend root volume
 ```
 lvextend -L+100%FREE /dev/centos/root
 lvextend -l +100%FREE /dev/centos/root
+lvextend -l +100%FREE /dev/ubuntu-vg/ubuntu-lv
+resize2fs /dev/ubuntu-vg/ubuntu-lv
 ```
 Resize the partition 
 ```
