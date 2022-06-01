@@ -1,0 +1,13 @@
+FROM alpine:3.8 AS promtool
+ARG PROM_VERSION=2.35.0
+WORKDIR /tmp/build
+RUN apk update
+RUN apk add wget
+RUN wget https://github.com/prometheus/prometheus/releases/download/v${PROM_VERSION}/prometheus-${PROM_VERSION}.linux-amd64.tar.gz
+RUN tar -xzvf prometheus-${PROM_VERSION}.linux-amd64.tar.gz
+
+
+FROM alpine:3.9
+ARG PROM_VERSION=2.35.0
+COPY --from=promtool /tmp/build/prometheus-${PROM_VERSION}.linux-amd64/ /bin
+ENTRYPOINT ["/bin/promtool"]
