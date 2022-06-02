@@ -1,13 +1,15 @@
-FROM alpine:3.8 AS yqtool
+FROM alpine:3.9 AS yqtool
 ARG YQ_VERSION=4.25.2
 WORKDIR /tmp/build
 RUN apk update
 RUN apk add wget
-RUN wget https://github.com/mikefarah/yq/releases/download/v${YQ_VERSION}/yq_darwin_amd64.tar.gz
-RUN tar -xzvf yq_darwin_amd64.tar.gz
+RUN wget https://github.com/mikefarah/yq/releases/download/v${YQ_VERSION}/yq_linux_amd64.tar.gz
+RUN tar -xzvf yq_linux_amd64.tar.gz
+RUN ls -lah
+RUN chmod +x yq_linux_amd64
+RUN mv yq_linux_amd64 yqtool
 
 
 FROM alpine:3.9
-ARG PROM_VERSION=2.35.0
-COPY --from=yq_darwin_amd64 /tmp/build/yq_darwin_amd64/ /bin/yq
-ENTRYPOINT ["/bin/yq"]
+COPY --from=yqtool /tmp/build/ /bin/yqtool
+ENTRYPOINT ["/bin/yqtool"]
