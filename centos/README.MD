@@ -32,4 +32,8 @@ Resize the partition
 xfs_growfs /dev/centos/root
 dracut --regenerate-all --force
 ```
+merge the partition lvm
+```
+https://gist.github.com/rafaeltuelho/1af483cb37e74889e3ff
+```
 
