@@ -36,3 +36,20 @@ sudo gitlab-ctl pg-upgrade -V 13
 
 sudo gitlab-ctl reconfigure
 ```
+```
+    gitlab-rake gitlab:background_migrations:finalize[CopyColumnUsingBackgroundMigrationJob,ci_build_needs,id,'[["build_id"]\, ["build_id_convert_to_bigint"]]']
+    gitlab-rake db:migrate
+    gitlab-rake gitlab:background_migrations:finalize[CopyColumnUsingBackgroundMigrationJob,ci_builds,id,'[["id"\, "stage_id"]\, ["id_convert_to_bigint"\, "stage_id_convert_to_bigint"]]']
+    gitlab-rake db:migrate
+    gitlab-rake gitlab:background_migrations:finalize[CopyColumnUsingBackgroundMigrationJob,ci_stages,id,'[["id"]\, ["id_convert_to_bigint"]]']
+    gitlab-rake db:migrate
+    gitlab-rake gitlab:background_migrations:finalize[CopyColumnUsingBackgroundMigrationJob,ci_builds_metadata,id,'[["id"]\, ["id_convert_to_bigint"]]']
+    gitlab-rake db:migrate
+    gitlab-rake gitlab:background_migrations:finalize[CopyColumnUsingBackgroundMigrationJob,deployments,id,'[["deployable_id"]\, ["deployable_id_convert_to_bigint"]]']
+    gitlab-rake db:migrate
+    gitlab-rake gitlab:background_migrations:finalize[CopyColumnUsingBackgroundMigrationJob,taggings,id,'[["id"\, "taggable_id"]\, ["id_convert_to_bigint"\, "taggable_id_convert_to_bigint"]]']
+    gitlab-rake db:migrate
+    gitlab-rake db:migrate
+    gitlab-rake db:migrate
+    gitlab-ctl restart
+```
