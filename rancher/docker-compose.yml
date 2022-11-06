@@ -13,4 +13,4 @@ services:
     privileged: true
 
 volumes:
-  rancher-data
+  rancher-data:
