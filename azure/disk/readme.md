@@ -58,4 +58,8 @@ Add the following line:
 
 /mnt/tainn-sre02   nfs-client-ip(rw,sync,no_subtree_check)
 /mnt/tainn-sre02   nfs-client-ip(rw,sync,no_subtree_check)
+
+
+Port 111 (TCP and UDP) and 2049 (TCP and UDP) for the NFS server.
+
 ```
