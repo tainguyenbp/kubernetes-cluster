@@ -21,4 +21,27 @@ sudo partprobe /dev/sdc1
 
 mkdir -p /mnt/tainn-sre02
 
+sudo mount /dev/sdc1 /mnt/tainn-sre02
+
+sudo blkid
+
+sudo vim /etc/fstab
+
+UUID=33333333-3b3b-3c3c-3d3d-3e3e3e3e3e3e   /mnt/tainn-sre02   xfs   defaults,nofail   1   2
+
+mount -a
+umount /mnt/tainn-sre02
+
+Some Linux kernels support TRIM/UNMAP operations to discard unused blocks on the disk. This feature is primarily useful in standard storage to inform Azure that deleted pages are no longer valid and can be discarded, and can save money if you create large files and then delete them.
+
+There are two ways to enable TRIM support in your Linux VM. As usual, consult your distribution for the recommended approach:
+
+Ubuntu
+sudo apt-get install util-linux
+sudo fstrim /datadrive
+
+RHEL/CentOS
+sudo yum install util-linux
+sudo fstrim /datadrivev
+
 ```
