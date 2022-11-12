@@ -38,10 +38,24 @@ There are two ways to enable TRIM support in your Linux VM. As usual, consult yo
 
 Ubuntu
 sudo apt-get install util-linux
-sudo fstrim /datadrive
+sudo fstrim /mnt/tainn-sre02
 
 RHEL/CentOS
 sudo yum install util-linux
-sudo fstrim /datadrivev
+sudo fstrim /mnt/tainn-sre02
 
+```
+
+### 2. Set Up a NFS Server on Debian 10
+```
+sudo apt install nfs-kernel-server
+
+chown nobody:nogroup /mnt/tainn-sre02
+chmod 755 /mnt/tainn-sre02
+
+vim /etc/exports
+Add the following line:
+
+/mnt/tainn-sre02   nfs-client-ip(rw,sync,no_subtree_check)
+/mnt/tainn-sre02   nfs-client-ip(rw,sync,no_subtree_check)
 ```
