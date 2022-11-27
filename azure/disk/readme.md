@@ -63,3 +63,22 @@ Add the following line:
 Port 111 (TCP and UDP) and 2049 (TCP and UDP) for the NFS server.
 
 ```
+### 3. Set Up a minio
+```
+version: '3.9'
+
+services:
+  minio:
+    container_name: minio
+    command: server /data --console-address ":9001"
+    environment:
+      - MINIO_ROOT_USER=tainnsre
+      - MINIO_ROOT_PASSWORD=N5QvGNaXXCbrPENM44ziXFMTsDy9XtWa
+    image: quay.io/minio/minio:latest
+    ports:
+      - '9000:9000'
+      - '9001:9001'
+    volumes:
+      - /data/minio:/data
+    restart: unless-stopped
+```
