@@ -58,7 +58,8 @@ Add the following line:
 
 /mnt/tainn-sre02   nfs-client-ip(rw,sync,no_subtree_check)
 /mnt/tainn-sre02   nfs-client-ip(rw,sync,no_subtree_check)
-
+```
+# test
 ```
   461  fdisk -l /dev/sda
   462  lsblk
