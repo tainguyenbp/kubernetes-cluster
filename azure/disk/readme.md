@@ -146,6 +146,21 @@ Add the following line:
   543  xfs_growfs /dev/sdc1
 ```
 
+### resize disk on azure
+```
+NAME    MAJ:MIN RM  SIZE RO TYPE MOUNTPOINT
+sda       8:0    0   64G  0 disk
+|-sda1    8:1    0 63.9G  0 part /
+|-sda14   8:14   0    3M  0 part
+`-sda15   8:15   0  124M  0 part /boot/efi
+sdb       8:16   0   32G  0 disk
+`-sdb1    8:17   0   32G  0 part /mnt
+sdc       8:32   0    3T  0 disk
+`-sdc1    8:33   0    3T  0 part /srv/tainnsre-nfs01
+
+growpart /dev/sdc 1
+xfs_growfs /dev/sdc1
+```
 Port 111 (TCP and UDP) and 2049 (TCP and UDP) for the NFS server.
 
 ```
