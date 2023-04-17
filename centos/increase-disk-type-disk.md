@@ -10,7 +10,7 @@ sda               8:0    0  150G  0 disk
   |-centos-root 253:0    0   50G  0 lvm  /
   |-centos-swap 253:1    0  7.9G  0 lvm  [SWAP]
   `-centos-home 253:2    0 91.1G  0 lvm  /home
-sdb               8:16   0    4T  0 disk /storage
+sdb               8:16   0    4T  0 disk /data
 sr0              11:0    1 1024M  0 rom
 
 echo 1 > /sys/block/sda/device/rescan
@@ -27,7 +27,7 @@ sudo partprobe /dev/sdb
 
 growpart /dev/sdb 1
 
-sudo xfs_growfs /storage
+sudo xfs_growfs /data
 
 ```
 ### skill reboot server
