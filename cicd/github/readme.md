@@ -1,4 +1,4 @@
-# cancel job github action in the main branch
+# 1. scripts cancel job github action in the main branch
 
 ```
 #!/bin/bash
