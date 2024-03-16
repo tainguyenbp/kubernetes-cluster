@@ -1,6 +1,5 @@
 # cancel job github action in the main branch
 
-```
 #!/bin/bash
 
 token=ghp_123456789
@@ -16,4 +15,3 @@ set -- $ids
 for i; do curl \
     -H "Authorization: token ${token}" \
     -X POST "https://api.github.com/repos/${repo}/actions/runs/${i}/cancel"; done
-```
