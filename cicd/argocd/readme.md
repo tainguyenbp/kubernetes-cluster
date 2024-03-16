@@ -1,6 +1,6 @@
 # setup-sso-argocd-github.md
 
-sso-argocd-github-client-secret.yaml
+### sso-argocd-github-client-secret.yaml
 ```
 ## add secret to SSO
 apiVersion: v1
@@ -15,8 +15,7 @@ data:
   dex.github.clientSecret: QXBwbGljYXRpb24gcmVjb25jaWxpYXRpb24gdGltZW91dCBpcyB0aGUgbWF4IGFtb3VudCBvZiB0aW1lIHJlcXVpcmVkIHRvIGRpc2NvdmVyIGlmIGEgbmV3IG1hbmlmZXN0cyB2ZXJzaW9uIGdvdA== # gen clientSecret and encode clientSecret
 ```
 
-
-# sso-argocd-github-configmap.yaml
+### sso-argocd-github-configmap.yaml
 ```
 apiVersion: v1
 kind: ConfigMap
@@ -67,4 +66,35 @@ data:
             teams:           # The list of authorized teams (optional)
             - SRE
 
+```
+
+### ingress-nginx-argocd.yaml
+```
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: argocd.hotromaytinhit.tech
+  namespace: argocd
+  annotations:
+    kubernetes.io/ingress.class: nginx
+    alb.ingress.kubernetes.io/ssl-passthrough: "true"
+    nginx.ingress.kubernetes.io/force-ssl-redirect: "false"
+    nginx.ingress.kubernetes.io/backend-protocol: "HTTP"
+    ingress.kubernetes.io/configuration-snippet: "gzip on;\ngzip_comp_level 5;\ngzip_http_version 1.1;\ngzip_min_length 16;\ngzip_proxied no_etag"
+    nginx.ingress.kubernetes.io/proxy-buffer-size: "1024k"
+    nginx.ingress.kubernetes.io/large-client-header-buffers: "64 2048k"
+    nginx.ingress.kubernetes.io/proxy-body-size: "30m"
+    nginx.ingress.kubernetes.io/client-body-buffer-size: "2m"
+spec:
+  rules:
+    - host: argocd.hotromaytinhit.tech
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: argocd-server
+                port:
+                  number: 8080
 ```
