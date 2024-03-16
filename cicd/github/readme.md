@@ -18,3 +18,21 @@ for i; do curl \
     -H "Authorization: token ${token}" \
     -X POST "https://api.github.com/repos/${repo}/actions/runs/${i}/cancel"; done
 ```
+# 2. Install github action seft-hosted in the k8s, eks, azure
+### 2.1. Install github action seft-hosted in the k8s, eks, azure
+```
+# gen github_token of the organization or the personal
+
+helm upgrade --install --namespace actions --create-namespace --set=authSecret.create=true \
+    --set=authSecret.github_token="ghp_123456789" \
+    --wait actions-runner-controller actions-runner-controller/actions-runner-controller \
+    --values values-gha.yaml
+
+helm upgrade --install --namespace actions --create-namespace --set=authSecret.create=true \
+    --set=authSecret.github_token="ghp_123456789" \
+    --wait actions-runner-controller actions-runner-controller/actions-runner-controller
+```
+### 2.2. Install github action seft-hosted in the k8s, eks, azure
+```
+
+```
