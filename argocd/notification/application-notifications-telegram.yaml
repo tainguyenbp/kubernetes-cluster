@@ -1,0 +1,35 @@
+# Create new Telegram channel.
+# Add your bot as an administrator.
+# Use this channel username (public channel) or chatID (private channel) in the subscription for your Telegram integration:
+---
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: nginx
+  namespace: argocd
+  annotations:
+    notifications.argoproj.io/subscribe.on-deployed.telegram: alerts
+    notifications.argoproj.io/subscribe.on-sync-failed.telegram: alerts
+    notifications.argoproj.io/subscribe.on-sync-succeeded.telegram: alerts
+    notifications.argoproj.io/subscribe.on-sync-succeeded.telegram: username
+    notifications.argoproj.io/subscribe.on-sync-succeeded.telegram: -1000000000000
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io
+spec:
+  project: default
+  source:
+    repoURL: https://github.com/tainguyenbp/kubernetes-cluster.git
+    targetRevision: HEAD
+    path: nginx
+  destination:
+    server: https://kubernetes.default.svc
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+      allowEmpty: false
+    syncOptions:
+      - Validate=true
+      - CreateNamespace=false
+      - PrunePropagationPolicy=foreground
+      - PruneLast=true
