@@ -13,3 +13,16 @@ grafana/loki-distributed
 grafana/tempo-distributed
 grafana/grafana
 ```
+
+
+
+### 1. create k3s
+```
+k3d cluster create k3s-remote01
+
+export KUBECONFIG="$(k3d kubeconfig write k3s-remote01)"
+
+k3d cluster create k3s-central01
+export KUBECONFIG="$(k3d kubeconfig write k3s-central01)"
+
+```
