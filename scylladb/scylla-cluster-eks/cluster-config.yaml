@@ -1,0 +1,85 @@
+apiVersion: eksctl.io/v1alpha5
+kind: ClusterConfig
+
+metadata:
+  name: eks-skylla-db
+  region: ap-southeast-1
+  version: "1.30"
+  tags:
+    Project: ScyllaDB-Development
+    Environments: development
+
+iam:
+  withOIDC: true
+
+kubernetesNetworkConfig:
+  ipFamily: IPv4
+  serviceIPv4CIDR: 10.103.0.0/16
+
+privateCluster:
+  enabled: true
+  skipEndpointCreation: true
+
+vpc:
+  id: "vpc-e1c2d186"
+  subnets:
+    private:
+      ap-southeast-1a: { id: subnet-123456789a } # subnet-a-private-eks-scylla-db
+      ap-southeast-1b: { id: subnet-123456789b } # subnet-b-private-eks-scylla-db
+      ap-southeast-1c: { id: subnet-123456789c } # subnet-c-private-eks-scylla-db
+
+addons:
+# - name: vpc-cni # no version is specified so it deploys the default version
+#   attachPolicyARNs:
+#     - arn:aws:iam::aws:policy/AmazonEKS_CNI_Policy
+# - name: coredns
+#   version: latest # auto discovers the latest available
+# - name: kube-proxy
+#   version: latest
+- name: aws-ebs-csi-driver
+  wellKnownPolicies:      # add IAM and service account
+    ebsCSIController: true
+
+managedNodeGroups:
+
+  - name: managed-ng-scylladb-development
+    instanceTypes: ["i3.2xlarge"]
+    minSize: 3
+    desiredCapacity: 3
+    maxSize: 6
+    volumeSize: 30
+    volumeType: gp3 # type gp2 or gp3
+    availabilityZones: ["ap-southeast-1a", "ap-southeast-1b","ap-southeast-1c"]
+    updateConfig:
+      maxUnavailable: 1
+    iam:
+      withAddonPolicies:
+        autoScaler: true
+    labels:
+      node-class: "worker-node"
+      Project: ScyllaDB-Development
+      scylla.scylladb.com/node-type: scylla
+      type_node_pool: ondemand # ondemand or spot
+      Environments: development
+    # taints:
+    #   role: "scylla-clusters:NoSchedule"
+    taints:
+      - key: scylla-clusters
+        value: "true"
+        effect: NoSchedule
+   #   - key: your.domain.com/development
+   #     value: "true"
+   #     effect: NoExecute
+    tags:
+      nodegroup-role: worker
+      Project: ScyllaDB-Development
+      type_node_pool: ondemand
+      Environments: development
+      scylla.scylladb.com/node-type: scylla
+      alpha.eksctl.io/nodegroup-name: managed-ng-scylladb-development
+      k8s.io/cluster-autoscaler/enabled: "true"
+      k8s.io/cluster-autoscaler/eks-skylla-db: "owned"
+    ssh:
+      allow: true
+      publicKeyName: t2inn-key
+    privateNetworking: true
