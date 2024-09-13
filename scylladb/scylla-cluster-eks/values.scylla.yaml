@@ -1,0 +1,127 @@
+agentImage:
+  repository: scylladb/scylla-manager-agent
+  tag: 3.3.0@sha256:dc2684f51e961d88da5a8eac2d9f165cb7a960cbf91f67f49332e7224317c96b
+alternator:
+  enabled: false
+  insecureEnableHTTP: true
+  writeIsolation: always
+automaticOrphanedNodeCleanup: false
+backups: []
+cpuset: false
+datacenter: ap-southeast-1
+developerMode: false
+forceRedeploymentReason: ""
+fullnameOverride: "scylladb-cluster"
+hostNetworking: false
+imagePullSecrets: []
+nameOverride: ""
+nodeSelector:
+  env: Data-ScyllaDB-Prod
+racks:
+- members: 1
+  name: ap-southeast-1a
+  resources:
+    limits:
+      cpu: 4
+      memory: 32Gi
+    placement:
+      nodeAffinity:
+        requiredDuringSchedulingIgnoredDuringExecution:
+          nodeSelectorTerms:
+          - matchExpressions:
+            - key: topology.kubernetes.io/zone
+              operator: In
+              values:
+              - ap-southeast-1a
+            - key: scylla.scylladb.com/node-type
+              operator: In
+              values:
+              - scylla
+      tolerations:
+        - key: role
+          operator: Equal
+          value: scylla-clusters
+          effect: NoSchedule
+    requests:
+      cpu: 1
+      memory: 4Gi
+  scyllaAgentConfig: scylla-agent-config
+  scyllaConfig: scylla-config
+  storage:
+    capacity: 200Gi
+    storageClassName: scylladb-local-xfs
+- members: 1
+  name: ap-southeast-1b
+  resources:
+    limits:
+      cpu: 4
+      memory: 32Gi
+    placement:
+      nodeAffinity:
+        requiredDuringSchedulingIgnoredDuringExecution:
+          nodeSelectorTerms:
+          - matchExpressions:
+            - key: topology.kubernetes.io/zone
+              operator: In
+              values:
+              - ap-southeast-1b
+            - key: scylla.scylladb.com/node-type
+              operator: In
+              values:
+              - scylla
+      tolerations:
+        - key: role
+          operator: Equal
+          value: scylla-clusters
+          effect: NoSchedule
+    requests:
+      cpu: 1
+      memory: 4Gi
+  scyllaAgentConfig: scylla-agent-config
+  scyllaConfig: scylla-config
+  storage:
+    capacity: 200Gi
+    storageClassName: scylladb-local-xfs
+- members: 1
+  name: ap-southeast-1c
+  resources:
+    limits:
+      cpu: 4
+      memory: 32Gi
+    placement:
+      nodeAffinity:
+        requiredDuringSchedulingIgnoredDuringExecution:
+          nodeSelectorTerms:
+          - matchExpressions:
+            - key: topology.kubernetes.io/zone
+              operator: In
+              values:
+              - ap-southeast-1c
+            - key: scylla.scylladb.com/node-type
+              operator: In
+              values:
+              - scylla
+      tolerations:
+        - key: role
+          operator: Equal
+          value: scylla-clusters
+          effect: NoSchedule
+    requests:
+      cpu: 1
+      memory: 4Gi
+  scyllaAgentConfig: scylla-agent-config
+  scyllaConfig: scylla-config
+  storage:
+    capacity: 200Gi
+    storageClassName: scylladb-local-xfs
+repairs: []
+scyllaArgs: ""
+scyllaImage:
+  repository: scylladb/scylla
+  tag: 6.1.1
+serviceAccount:
+  annotations: {}
+  create: true
+serviceMonitor:
+  create: false
+sysctls: []
