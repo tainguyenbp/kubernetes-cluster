@@ -14,11 +14,17 @@ kubectl apply -f ./nodeconfig-alpha.yaml
 
 kubectl apply -f ./local-volume-provisioner/local-csi-driver/
 
-helm upgrade --install scylla-operator scylla/scylla-operator --create-namespace --namespace scylla-operator --values ./values.scylla-operator.yaml
+helm upgrade --install scylla-operator scylla/scylla-operator \
+ --create-namespace --namespace scylla-operator \
+ --values ./values.scylla-operator.yaml
 
-helm upgrade --install scylla-manager scylla/scylla-manager --create-namespace --namespace scylla-manager --values ./values.scylla-manager.yaml
+helm upgrade --install scylla-manager scylla/scylla-manager \
+ --create-namespace --namespace scylla-manager \
+ --values ./values.scylla-manager.yaml
 
-helm upgrade --install scylla scylla/scylla --create-namespace --namespace scylla --values ./values.scylla.yaml
+helm upgrade --install scylla scylla/scylla \
+ --create-namespace --namespace scylla \
+ --values ./values.scylla.yaml
 
 kubectl get scyllacluster/scylla service/scylladb-cluster-client -n scylla
 
