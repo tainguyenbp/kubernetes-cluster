@@ -107,6 +107,22 @@ extraSecrets: {}
 
 executor: CeleryKubernetesExecutor
 
+ingress:
+    enabled: true
+    web:
+      enabled: true
+      annotations: {}
+      path: "/"
+      pathType: "ImplementationSpecific"
+      host: "airflow.hotromaytinhit.tech"
+      hosts: []
+      ingressClassName: ""
+      tls:
+        enabled: false
+        secretName: ""
+      precedingPaths: []
+      succeedingPaths: []
+
 flower:
   enabled: false
 
