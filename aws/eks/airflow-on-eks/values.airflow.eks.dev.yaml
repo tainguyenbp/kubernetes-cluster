@@ -1,0 +1,193 @@
+# Provide a name to substitute for the full names of resources
+fullnameOverride: ""
+
+# Provide a name to substitute for the name of the chart
+nameOverride: ""
+
+defaultAirflowRepository: apache/airflow
+defaultAirflowTag: "2.10.2"
+airflowVersion: "2.10.2"
+airflowHome: /opt/airflow
+
+webserverSecretKey: mnQvG1xGHr6YTLuOh9FJsOsjhDMHwq52L68zvWIhMOPX6KW8mXDtei27JQseMtckpF2xMNyZpm0iMICXkVB6eBVdlujLEB8ga3CaqjNtxjoxgwS4HGkrTDpPtTwxYDqm
+
+show_templated_fields: none
+
+hide_sensitive_variable_fields: True
+
+fernetKey: J4SXmR0MRvEFoeJT96EhfOxy79Phi6rEBWYY8V7DnIvaNYPblgwZ0zaMrr8eG78L
+
+createUserJob:
+  nodeSelector:
+    eks.amazonaws.com/nodegroup: managed-ng-eks-airflow-dev
+
+dags:
+  gitSync:
+    knownHosts: |
+      github.com ssh-rsa 123456789
+    branch: main
+    depth: 1
+    enabled: true
+    maxFailures: 10
+    repo: git@github.com:tainguyenbp/kubernetes-cluster.git
+    rev: HEAD
+    sshKeySecret: airflow-eks-ssh-secret
+    credentialsSecret: airflow-eks-git-credentials
+    subPath: airflow/dags
+    wait: 30
+    containerName: git-sync
+    uid: 65533
+data:
+  metadataConnection:
+    pass: PE7vqzJivcmDDDCiUeORjGnwPGTO5kLUwtJk817lOCAxJjBmVqi0b2xYYnf58E7J
+
+env:
+  - name: "TZ"
+    value: "Asia/Saigon"
+  - name: "HOSTNAME"
+    value: "eks-airflow-dev"
+  - name: "AIRFLOW__CORE__HOSTNAME_CALLABLE"
+    value: "airflow.utils.net.get_host_ip_address"
+  - name: "AWS_ACCESS_KEY_ID"
+    value: "<AWS_ACCESS_KEY_ID>"
+  - name: "AWS_S3_BUCKET"
+    value: "name_s3"
+  - name: "AIRFLOW__CORE__DAG_CONCURRENCY"
+    value: "64"
+  - name: "AIRFLOW__CORE__MAX_ACTIVE_RUNS_PER_DAG"
+    value: "32"
+  - name: "AIRFLOW__CORE__PARALLELISM"
+    value: "64"
+  - name: "AWS_SECRET_ACCESS_KEY"
+    value: "<AWS_SECRET_ACCESS_KEY>"
+  - name: "AIRFLOW__CORE__REMOTE_LOGGING"
+    value: "true"
+  - name: "AIRFLOW__CORE__REMOTE_LOG_CONN_ID"
+    value: "<name_s3_log>"
+  - name: "AIRFLOW__CORE__REMOTE_BASE_LOG_FOLDER"
+    value: "s3://<name_s3>/<path_s3_log>"
+  - name: "AIRFLOW__CORE__ENCRYPT_S3_LOGS"
+    value: "false"
+  - name: "AIRFLOW__KUBERNETES_ENVIRONMENT_VARIABLES__AIRFLOW__CORE__LOGGING_CONFIG_CLASS"
+    value: "logging_config.LOGGING_CONFIG"
+  - name: "AIRFLOW__KUBERNETES_ENVIRONMENT_VARIABLES__AIRFLOW__CORE__LOGGING_LEVEL"
+    value: "INFO"
+  - name: "AIRFLOW__KUBERNETES_ENVIRONMENT_VARIABLES__AIRFLOW__CORE__TASK_LOG_READER"
+    value: "s3.task"
+  - name: "AIRFLOW__KUBERNETES_ENVIRONMENT_VARIABLES__AIRFLOW__CORE__REMOTE_LOGGING"
+    value: "true"
+  - name: "AIRFLOW__KUBERNETES_ENVIRONMENT_VARIABLES__AIRFLOW__CORE__REMOTE_LOG_CONN_ID"
+    value: "<name_s3_log>"
+  - name: "AIRFLOW__KUBERNETES_ENVIRONMENT_VARIABLES__AIRFLOW__CORE__REMOTE_BASE_LOG_FOLDER"
+    value: "s3://<name_s3>/<path_s3_log>"
+  - name: "AIRFLOW__KUBERNETES_ENVIRONMENT_VARIABLES__AIRFLOW__CORE__ENCRYPT_S3_LOGS"
+    value: "false"
+  - name: "AWS_DEFAULT_REGION"
+    value: "<AWS_DEFAULT_REGION>"
+  - name: "AIRFLOW__CORE__FERNET_KEY"
+    value: "J4SXmR0MRvEFoeJT96EhfOxy79Phi6rEBWYY8V7DnIvaNYPblgwZ0zaMrr8eG78L"
+  - name: "AIRFLOW__SENTRY__SENTRY_ON"
+    value: "true"
+  - name: "AIRFLOW__SENTRY__SENTRY_DSN"
+    value: "https://1234567890987654321@sentry.hotromaytinhit.tech/20"
+  - name: "AIRFLOW_CONN_AWS_S3LOG"
+    value: "s3://<aws_access_key>:<aws_secret_key>@S3?region=<aws_region>"
+  - name: "AIRFLOW_CONN_S3WAREHOUSE"
+    value: "s3://<aws_access_key>:<aws_secret_key>@S3?region=<aws_region>"
+  - name: "AIRFLOW_CONN_ATHENA"
+    value: "postgresql://athen_user:zuVGYmZ9OA6cTbgHzbthxTw3lg0MsPkh@postgres.athena-dev.svc.local:5432/athena"
+  - name: "AIRFLOW_CONN_DATAWAREHOUSE"
+    value: "postgresql://data_warehouse_user:zuVGYmZ9OA6cTbgHzbthxTw3lg0MsPkh@postgres.datawarehouse-dev.svc.local:5432/data_warehouse"
+  - name: "AIRFLOW_CONN_BIWAREHOUSE"
+    value: "postgresql://bi_warehouse_user:zuVGYmZ9OA6cTbgHzbthxTw3lg0MsPkh@postgres.biwarehouse-dev.svc.local:5432/bi_warehouse"
+
+secret: {}
+
+extraSecrets: {}
+
+executor: CeleryKubernetesExecutor
+
+flower:
+  enabled: false
+
+migrateDatabaseJob:
+  nodeSelector:
+    eks.amazonaws.com/nodegroup: managed-ng-eks-airflow-dev
+
+postgresql:
+  enabled: true
+  auth:
+    enablePostgresUser: true
+    postgresqlPassword: PE7vqzJivcmDDDCiUeORjGnwPGTO5kLUwtJk817lOCAxJjBmVqi0b2xYYnf58E7J
+    nodeSelector:
+      alpha.eksctl.io/nodegroup-name: managed-ng-eks-airflow-dev
+
+redis:
+  nodeSelector:
+    alpha.eksctl.io/nodegroup-name: managed-ng-eks-airflow-dev
+
+scheduler:
+  livenessProbe:
+    initialDelaySeconds: 30
+    timeoutSeconds: 15
+    failureThreshold: 10
+    periodSeconds: 60
+    command:
+      - sh
+      - -c
+      - |
+        CONNECTION_CHECK_MAX_COUNT=0 AIRFLOW__LOGGING__LOGGING_LEVEL=ERROR exec /entrypoint \
+        airflow jobs check --job-type SchedulerJob
+  nodeSelector:
+    eks.amazonaws.com/nodegroup: managed-ng-eks-airflow-dev
+
+statsd:
+  nodeSelector:
+    eks.amazonaws.com/nodegroup: managed-ng-eks-airflow-dev
+
+triggerer:
+  enabled: false
+
+webserver:
+  defaultUser:
+    email: nguyenngoctaibp@gmail.com
+    enabled: true
+    firstName: admin
+    lastName: user
+    password: password@123456789
+    role: Admin
+    username: admin
+  nodeSelector:
+    eks.amazonaws.com/nodegroup: managed-ng-eks-airflow-dev
+
+workers:
+  keda:
+    cooldownPeriod: 60
+    enabled: true
+    maxReplicaCount: 10
+    minReplicaCount: 1
+    namespaceLabels: {}
+    pollingInterval: 5
+  affinity:
+    nodeAffinity:
+      requiredDuringSchedulingIgnoredDuringExecution:
+        nodeSelectorTerms:
+          - matchExpressions:
+              - key: eks.amazonaws.com/nodegroup
+                operator: In
+                values:
+                  - managed-ng-eks-airflow-dev
+  persistence:
+    enabled: false
+  replicas: 3
+  resources:
+    limits:
+      cpu: 2000m
+      memory: 4Gi
+    requests:
+      cpu: 500m
+      memory: 1Gi
+
+config:
+  celery:
+    worker_concurrency: 8
