@@ -1,0 +1,31 @@
+global:
+  storageClass: longhorn
+
+# Run in production mode behind NGINX proxy terminating TLS sessions
+# ref: https://www.keycloak.org/server/reverseproxy
+# edge proxy mode: Enables communication through HTTP between the proxy and Keycloak.
+# This mode is suitable for deployments with a highly secure internal network where the reverse proxy keeps a secure connection (HTTP over TLS) with clients while communicating with Keycloak using HTTP.
+production: true
+proxy: edge
+# Admin user
+auth:
+  adminUser: admin
+# postgresSQL
+postgresql:
+  enabled: true
+  auth:
+    username: keycloak
+    database: passw0rd@keycloak
+# Ingress config
+ingress:
+  enabled: true
+  ingressClassName: "nginx"
+  pathType: Prefix
+  annotations:
+    cert-manager.io/cluster-issuer: ca-issuer
+    # Increasing proxy buffer size to avoid
+    # https://stackoverflow.com/questions/57503590/upstream-sent-too-big-header-while-reading-response-header-from-upstream-in-keyc
+    nginx.ingress.kubernetes.io/proxy-buffers-number: "4"
+    nginx.ingress.kubernetes.io/proxy-buffer-size: "16k"
+  hostname: sso.tainguyenbp.vn
+  tls: true
