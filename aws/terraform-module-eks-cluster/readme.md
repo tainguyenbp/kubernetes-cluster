@@ -53,6 +53,18 @@
 |   |   |-- main.tf
 |   |   |-- outputs.tf
 |   |   `-- variables.tf
+|   |-- eks-karpenter
+|   |   |-- main.tf
+|   |   |-- outputs.tf
+|   |   `-- variables.tf
+|   |-- ec2_instance
+|   |   |-- main.tf
+|   |   |-- outputs.tf
+|   |   `-- variables.tf
+|   |-- elasticache
+|   |   |-- main.tf
+|   |   |-- outputs.tf
+|   |   `-- variables.tf
 |   |-- rds
 |   |   |-- main.tf
 |   |   |-- outputs.tf
